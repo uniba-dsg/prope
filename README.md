@@ -2,7 +2,7 @@
 
 PROcess-aware information systems Portability mEtrics suite
 
-<!--[![Build Status](https://travis-ci.org/lenhard/pete.png?branch=master)](https://travis-ci.org/lenhard/pete)-->
+[![Build Status](https://travis-ci.org/uniba-dsg/prope.png?branch=master)](https://travis-ci.org/uniba-dsg/prope)
 
 Prope is a static analyzer that _probes_ for portability issues in process code and highlights these issues by computing portability metrics for a process.
 It can analyze a variety of artifacts, most notably processes written in BPMN 2.0 and BPEL 2.0. It can also analyze deployment archives and log files.
