@@ -1,4 +1,4 @@
-ds = read.csv("c:/workspaces/git/pete/r-results.csv")
+ds = read.csv("c:/workspaces/results.csv", sep=";")
 one <- subset(ds, NServ == 1)
 two <- subset(ds, NServ == 2)
 five <- subset(ds, NServ == 5)
