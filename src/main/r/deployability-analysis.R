@@ -1,4 +1,4 @@
-ds = read.csv2("c:/workspaces/git/pete/r-results.csv")
+ds = read.csv("c:/workspaces/results.csv", sep=";")
 active <- subset(ds, group == "active")
 ode <- subset(ds, group == "ode")
 bpelg <- subset(ds, group == "bpelg")
