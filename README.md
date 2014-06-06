@@ -1,5 +1,6 @@
 # prope
-**Pro**cess-Aware Information Systems **P**ortability M**e**trics Suite
+
+PROcess-aware information systems Portability mEtrics suite
 
 <!--[![Build Status](https://travis-ci.org/lenhard/pete.png?branch=master)](https://travis-ci.org/lenhard/pete)-->
 
