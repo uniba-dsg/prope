@@ -1,6 +1,7 @@
-# prope
+# prope <img align="right" src="src/main/resources/prope-logo.png" height="80" width="80"/>
 
-PROcess-aware information systems Portability mEtrics suite
+
+PROcess-aware information systems Portability mEtrics suite 
 
 [![Build Status](https://travis-ci.org/uniba-dsg/prope.png?branch=master)](https://travis-ci.org/uniba-dsg/prope)
 
