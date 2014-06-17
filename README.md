@@ -28,11 +28,14 @@ Prope uses the gradle wrapper, so anything besides Java will be downloaded and i
 [MIT license](http://opensource.org/licenses/MIT)
 
 ## Usage
-Prope can be built, but also executed using gradle.
+Prope can be executed using OS dependent start scripts. It can be built, but also executed using gradle.
 ```bash
+$ prope "<ARGS>"
+# usage: <metric-option> <path-to-files>
+
+# alternatively
 $ gradlew run -Pargs="<ARGS>"
 
-# usage: <metric-option> <path-to-files>
 ```
 `<path-to-files>`: Prope parses single files or recursively traverses directory structures, looking for relevant files. Everything that is analyzed in an execution run is aggregated to a result set and written to CSV files, ready to be consumed by MS Excel or R. Prope is forgiving: It tries to analyzes as many files as possible, sometimes depending on the type, but if the analysis for a file fails or nothing relevant is found, that file is just ignored.
 
@@ -44,10 +47,14 @@ $ gradlew run -Pargs="<ARGS>"
 
 ```bash
 # Examples
-$ gradlew run -Pargs="-p src/test/resources/portability/Invoke-Empty.bpel" # Compute portability metrics for a process from the test directory
-$ gradlew run -Pargs="-i src/test/resources/installability/server" # Compute installability metrics from all files of a specific test directory 
-$ gradlew run -Pargs="-i src/test/resources/installability/deployment" # Compute deployability metrics from all files of a specific test directory 
-$ gradlew run -Pargs="-a src/test/resources/adaptability" # Compute adaptability metrics from all files of a specific test directory 
+# Compute portability metrics for a process from the test directory
+$ prope -p src/test/resources/portability/Invoke-Empty.bpel 
+# Compute installability metrics from all files of a specific test directory 
+$ prope -i src/test/resources/installability/server 
+# Compute deployability metrics from all files of a specific test directory 
+$ prope -i src/test/resources/installability/deployment 
+# Compute adaptability metrics from all files of a specific test directory 
+$ prope -a src/test/resources/adaptability 
 ```
 Prope comes with tasks for generation IntelliJ and Eclipse project files
 ```bash
