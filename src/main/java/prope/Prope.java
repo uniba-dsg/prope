@@ -9,8 +9,6 @@ import prope.executables.AnalysisWorkflow;
 public class Prope {
 
 	public static void main(String[] args) {
-		printGreeting();
-
 		validateArgs(args);
 
 		Path root = Paths.get(args[1]);
@@ -19,11 +17,6 @@ public class Prope {
 				getAnalysisType(args[0]));
 
 		workflow.start();
-	}
-
-	private static void printGreeting() {
-		System.out.println("Hello, I'm Pete");
-		System.out.println("I analyse code and compute portability metrics");
 	}
 
 	private static void validateArgs(String[] args) {
