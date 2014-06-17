@@ -23,6 +23,11 @@ public final class ReportWriter {
 	}
 
 	public void writeToExcelFile(String outputFile) {
+		if(report.getEntries().isEmpty()){
+			System.out.println("There is nothing to write... Did you use the correct analysis type?");
+			return;
+		}
+		
 		writeToFile(outputFile, excelDelimiter);
 	}
 
@@ -38,7 +43,7 @@ public final class ReportWriter {
 	}
 
 	private void printHeader(PrintWriter writer, String delimiter) {
-		writer.print("filename" + delimiter);
+		writer.print("filename" + delimiter);		
 		for (String varName : report.getEntries().get(0).getVariableNames()) {
 			writer.print(varName + delimiter);
 		}
