@@ -52,7 +52,7 @@ $ prope -p src/test/resources/portability/Invoke-Empty.bpel
 # Compute installability metrics from all files of a specific test directory 
 $ prope -i src/test/resources/installability/server 
 # Compute deployability metrics from all files of a specific test directory 
-$ prope -i src/test/resources/installability/deployment 
+$ prope -d src/test/resources/installability/deployment 
 # Compute adaptability metrics from all files of a specific test directory 
 $ prope -a src/test/resources/adaptability 
 ```
