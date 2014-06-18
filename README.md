@@ -2,7 +2,7 @@
 
 Pete is a tool for computing metrics that characterize the portability of executable service-oriented processes implemented in several process languages. 
 
-Pete has been used in this revision for calculating the results of the paper "*Measuring the Installability of Service Orchestrations Using the SQuaRE Method*" presented at [SOCA 2013](http://conferences.computer.org/soca/).
+Pete has been used in this revision for calculating the results of the paper "*Measuring the Installability of Service Orchestrations Using the SQuaRE Method*" presented at [SOCA 2013](http://conferences.computer.org/soca/2013/venue.htm).
 A preprint of the paper [is available here](http://www.uni-bamberg.de/pi/bereich/forschung/publikationen/13-08-harrer-lenhard-wirtz/).
 
 
