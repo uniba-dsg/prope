@@ -44,7 +44,7 @@ $ gradlew run -Pargs="<ARGS>"
 * `i`: prope computes installability metrics for process engines, such as average installation time or installation effort
 * `a`: prope computes adaptability metrics for processes, such as binary or weighted adaptability
 
-`<path-to-files>`: Prope parses single files or recursively traverses directory structures, looking for relevant files. Everything that is analyzed in an execution run is aggregated to a result set and written to CSV files, ready to be consumed by MS Excel or R. Prope is forgiving: It tries to analyzes as many files as possible, sometimes depending on the type, but if the analysis for a file fails or nothing relevant is found, that file is just ignored.
+`<path-to-files>`: Prope parses single files or recursively traverses directory structures, looking for relevant files. Everything that is analyzed in an execution run is aggregated to a result set and written to CSV files, ready to be consumed by MS Excel or R. Prope is forgiving: It tries to analyze as many files as possible, sometimes depending on the type, but if the analysis for a file fails or nothing relevant is found, that file is just ignored.
 
 ```bash
 # Examples
