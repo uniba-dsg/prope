@@ -19,12 +19,12 @@ prop.table(summary(sane$isExecutable))
 # plot element occurences
 constructs = read.csv2("c:/workspaces/git/pete/raw.csv")
 constructsSorted = constructs[order(constructs$number),]
-constructsRemoved = constructsSorted[(constructsSorted$number > 150),]
+constructsRemoved = constructsSorted[(constructsSorted$number > 300),]
 constructsRemoved$number <- (constructsRemoved$number / 2995) * 100
 list(constructsRemoved)
 par(mar=c(6, 12, 4, 2) + 0.1)
 #barplot(constructsRemoved$number, horiz=TRUE,names.arg=constructsRemoved$element, las=1,cex.names=0.8, xlab="Percentage of Processes", ylab="", xlim=c(0,100), mtext("BPMN Elements", side=2, line=10))
-barplot(constructsRemoved$number, horiz=TRUE,names.arg=constructsRemoved$element, las=1,cex.names=0.8, xlab="Percentage of Processes", ylab="", xlim=c(0,100))
+barplot(constructsRemoved$number, horiz=TRUE,names.arg=constructsRemoved$element, las=1,cex.names=1.5, cex.lab=2, xlab="Percentage of Processes", ylab="", xlim=c(0,100))
 
 #group in executable and non-executable
 exec <- subset(sane, sane$isExecutable=='true')
