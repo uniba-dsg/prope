@@ -62,7 +62,20 @@ public class AdaptabilityAnalyzer implements FileAnalyzer {
 		List<ReportEntry> entries = new ArrayList<>(1);
 		entries.add(entry);
 
+		getGroupStringIfPossible(filePath.toAbsolutePath().toString(), entry);
+
 		return entries;
+	}
+
+	private void getGroupStringIfPossible(String pathName, ReportEntry entry) {
+		String groupKey = "adaptability-data-";
+		if (pathName.contains(groupKey)) {
+			int indexOfGroupKey = pathName.indexOf(groupKey);
+			String group = pathName.substring(
+					indexOfGroupKey + groupKey.length(), indexOfGroupKey
+							+ groupKey.length() + 10);
+			entry.addVariable("group", group);
+		}
 	}
 
 	private void populateReportEntry(ReportEntry entry) {
