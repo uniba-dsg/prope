@@ -14,6 +14,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import net.sf.saxon.lib.NamespaceConstant;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.ErrorHandler;
@@ -37,6 +39,8 @@ public class AdaptabilityAnalyzer implements FileAnalyzer {
 	private List<AdaptabilityMetric> testMetrics;
 
 	public AdaptabilityAnalyzer() {
+		System.setProperty("javax.xml.xpath.XPathFactory:" + NamespaceConstant.OBJECT_MODEL_SAXON,
+                "net.sf.saxon.xpath.XPathFactoryImpl");
 		nodeCounter = new XPathNodeCounter();
 		inspector = new BpmnInspector();
 
