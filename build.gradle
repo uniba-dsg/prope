@@ -2,6 +2,7 @@ apply plugin: "java"
 apply plugin: "idea"
 apply plugin: "eclipse"
 apply plugin: "application"
+apply plugin: "findbugs"
 
 mainClassName = "prope.Prope"
 
@@ -29,6 +30,18 @@ dependencies {
 	compile files('./lib/bpp.jar')
 	compile files('./lib/BPMN-Reference-Validator.jar')
 	testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+findbugs {
+	ignoreFailures = true
+	effort = "max"
+}
+
+tasks.withType(FindBugs) {
+	reports {
+		xml.enabled = false
+		html.enabled = true
+	}
 }
 
 task wrapper(type: Wrapper) {
