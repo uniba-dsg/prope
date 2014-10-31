@@ -25,9 +25,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 import prope.executables.AnalysisException;
+import prope.metrics.adaptability.BpmnNamespaceContext;
 import prope.metrics.adaptability.elements.AdaptableElement;
 import prope.metrics.adaptability.elements.AdaptableElements;
-import bpp.domain.BpelNamespaceContext;
 
 public class XPathNodeCounter implements NodeCounter {
 
@@ -58,7 +58,7 @@ public class XPathNodeCounter implements NodeCounter {
 				.newInstance(NamespaceConstant.OBJECT_MODEL_SAXON);
 		xpath = (XPathEvaluator) xpathFactory.newXPath();
 		xpath.getConfiguration().setLineNumbering(true);
-		xpath.setNamespaceContext(new BpelNamespaceContext());
+		xpath.setNamespaceContext(new BpmnNamespaceContext());
 	}
 
 	@Override
