@@ -1,26 +1,30 @@
 #load metric data; adjust this to the path of the result file written by pete
-ds = read.csv("c:/workspaces/results.csv", sep=";")
+input = read.csv("c:/workspaces/results.csv", sep=";")
 library(Rcmdr)
+
+ds <- subset(input, input$group == "19-05-2014")
+ds2 <- subset(input, input$group == "10-10-2014")
 
 # sanity checks
 nrow(ds)
+nrow(ds2)
 colnames(ds)
 prop.table(summary(ds$isCorrectNamespace))
 prop.table(summary(ds$referencesIssuesFound))
 prop.table(summary(ds$isExecutable))
 
 # reduced data set
-#sane <- ds[ds$isCorrectNamespace=="true"&ds$referencesIssuesFound=="false",]
 sane <- subset(ds,ds$isCorrectNamespace=='true' & ds$referencesIssuesFound=='false')
 
 nrow(sane)
 prop.table(summary(sane$isExecutable))
+summary(sane$isExecutable)
 
 # plot element occurences
-constructs = read.csv2("c:/workspaces/git/pete/raw.csv")
+constructs = read.csv("c:/workspaces/git/prope/raw.csv")
 constructsSorted = constructs[order(constructs$number),]
-constructsRemoved = constructsSorted[(constructsSorted$number > 300),]
-constructsRemoved$number <- (constructsRemoved$number / 2995) * 100
+constructsRemoved = constructsSorted[(constructsSorted$number > 150),]
+constructsRemoved$number <- (constructsRemoved$number / nrow(ds)) * 100
 list(constructsRemoved)
 par(mar=c(6, 12, 4, 2) + 0.1)
 #barplot(constructsRemoved$number, horiz=TRUE,names.arg=constructsRemoved$element, las=1,cex.names=0.8, xlab="Percentage of Processes", ylab="", xlim=c(0,100), mtext("BPMN Elements", side=2, line=10))
@@ -124,3 +128,34 @@ wilcox.test(smallNonExec$AD0.6,largeNonExec$AD0.6, alternative="greater")
 summary(smallNonExec$wAD)
 summary(largeNonExec$wAD)
 wilcox.test(smallNonExec$wAD,largeNonExec$wAD, alternative="greater")
+
+#group in executable and non-executable for second set
+sane2 <- subset(ds2,ds2$isCorrectNamespace=='true' & ds2$referencesIssuesFound=='false')
+nrow(sane2)
+prop.table(summary(sane2$isExecutable))
+summary(sane2$isExecutable)
+exec2 <- subset(sane2, sane2$isExecutable=='true')
+nonExec2 <- subset(sane2, sane2$isExecutable=='false')
+nrow(exec2)
+nrow(nonExec2)
+
+#test if there are difference in the distributions over time
+nrow(exec)
+nrow(exec2)
+summary(exec$AD0.6)
+summary(exec2$AD0.6)
+wilcox.test(exec$AD0.6,exec2$AD0.6, alternative="greater")
+summary(exec$wAD)
+summary(exec2$wAD)
+wilcox.test(exec$wAD,exec2$wAD, alternative="greater")
+
+
+nrow(nonExec)
+nrow(nonExec2)
+summary(nonExec$AD0.6)
+summary(nonExec2$AD0.6)
+wilcox.test(nonExec$AD0.6,nonExec2$AD0.6, alternative="greater")
+summary(nonExec$wAD)
+summary(nonExec2$wAD)
+wilcox.test(nonExec$wAD,nonExec2$wAD, alternative="greater")
+
