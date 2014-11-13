@@ -18,9 +18,7 @@ public final class ReportWriter {
 	}
 
 	public void printToConsole() {
-		for (ReportEntry entry : report) {
-			System.out.println(entry);
-		}
+		report.forEach(System.out::println);
 	}
 
 	public void writeToExcelFile(String outputFile) {
@@ -47,16 +45,18 @@ public final class ReportWriter {
 
 	private void printHeader(PrintWriter writer, String delimiter) {
 		writer.print("filename" + delimiter);
-		for (String varName : report.getEntries().get(0).getVariableNames()) {
-			writer.print(varName + delimiter);
-		}
+
+		report.getEntries().get(0).getVariableNames()
+				.forEach(varName -> writer.print(varName + delimiter));
+
 		writer.println();
 	}
 
 	private void printBody(PrintWriter writer, String delimiter) {
-		for (ReportEntry entry : report) {
-			writer.println(entry.toStringWithSeparator(delimiter));
-		}
+		report.getEntries()
+				.forEach(
+						entry -> writer.println(entry
+								.toStringWithSeparator(delimiter)));
 	}
 
 	public void writeToRFile(String outputFile) {
