@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import prope.reporting.Report;
-import prope.reporting.ReportEntry;
 
 public final class DirectoryAnalyzer {
 
@@ -22,15 +21,15 @@ public final class DirectoryAnalyzer {
 	public Report analyzeDirectory(Path directory) {
 
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(directory)) {
+			
 			for (Path path : stream) {
 				if (Files.isRegularFile(path)) {
-					for (ReportEntry entry : fileAnalyzer.analyzeFile(path)) {
-						report.addEntry(entry);
-					}
+					report.addAllEntries(fileAnalyzer.analyzeFile(path));
 				} else if (Files.isDirectory(path)) {
 					analyzeDirectory(path);
 				}
 			}
+			
 		} catch (IOException e) {
 			throw new AnalysisException(e);
 		}

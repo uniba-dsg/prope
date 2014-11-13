@@ -1,5 +1,6 @@
 package prope.reporting;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -15,6 +16,10 @@ public final class Report implements Iterable<ReportEntry> {
 
 	public void addEntry(ReportEntry entry) {
 		entries.add(entry);
+	}
+
+	public void addAllEntries(Collection<ReportEntry> entryCollection) {
+		entries.addAll(entryCollection);
 	}
 
 	public void append(Report report) {
