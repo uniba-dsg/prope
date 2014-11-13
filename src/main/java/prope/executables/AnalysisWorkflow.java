@@ -94,7 +94,7 @@ public final class AnalysisWorkflow {
 	private void purgeTempDir() {
 		try {
 			FileUtils.deleteDirectory(new File("tmp"));
-		} catch (IOException e) {
+		} catch (IOException ignore) {
 			// Not critical -> ignore
 		}
 	}
