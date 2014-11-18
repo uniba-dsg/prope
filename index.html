@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Prope : PROcess-aware information systems Portability mEtrics suite">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Prope</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/uniba-dsg/prope">View on GitHub</a>
+
+          <h1 id="project_title">Prope</h1>
+          <h2 id="project_tagline">PROcess-aware information systems Portability mEtrics suite</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/uniba-dsg/prope/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/uniba-dsg/prope/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="prope-" class="anchor" href="#prope-" aria-hidden="true"><span class="octicon octicon-link"></span></a>prope <img align="right" src="src/main/resources/prope-logo.png" height="80" width="80">
+</h1>
+
+<p>PROcess-aware information systems Portability mEtrics suite </p>
+
+<p><a href="https://travis-ci.org/uniba-dsg/prope"><img src="https://travis-ci.org/uniba-dsg/prope.png?branch=master" alt="Build Status"></a>
+<a href="https://www.versioneye.com/user/projects/53b3bf930d5bb8091c00001a"><img src="https://www.versioneye.com/user/projects/53b3bf930d5bb8091c00001a/badge.svg?style=flat" alt="Dependency Status"></a></p>
+
+<p>Prope is a static analyzer that <em>probes</em> for portability issues in process code and highlights these issues by computing portability metrics for a process.
+It can analyze a variety of artifacts, most notably processes written in BPMN 2.0 and BPEL 2.0. It can also analyze deployment archives and log files.</p>
+
+<h2>
+<a id="quality-characteristics" class="anchor" href="#quality-characteristics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quality Characteristics</h2>
+
+<p>Prope computes portability metrics aligned to the ISO/IEC 25010 Systems and software Quality Requirements and Evaluation (SQuaRE) method. This involves four quality characteristics:</p>
+
+<table>
+<thead>
+<tr>
+<th>Quality Characteristic</th>
+<th>Status (package)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Direct code portability</td>
+<td>implemented (<code>prope.metrics.portability</code>)</td>
+</tr>
+<tr>
+<td>Installability</td>
+<td>implemented (<code>prope.metrics.installability</code>)</td>
+</tr>
+<tr>
+<td>Adaptability</td>
+<td>implemented (<code>prope.metrics.adaptability</code>)</td>
+</tr>
+<tr>
+<td>Replaceability</td>
+<td>ongoing</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="software-requirements" class="anchor" href="#software-requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Software Requirements</h2>
+
+<p>Prope uses the gradle wrapper, so anything besides Java will be downloaded and installed automatically.</p>
+
+<ul>
+<li>JDK 1.8.X
+
+<ul>
+<li>
+<code>JAVA_HOME</code> should point to the jdk directory</li>
+<li>
+<code>PATH</code> should include <code>JAVA_HOME/bin</code>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="licensing" class="anchor" href="#licensing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Licensing</h2>
+
+<p><a href="http://opensource.org/licenses/MIT">MIT license</a></p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Prope can be executed using OS dependent start scripts. It can be built, but also executed using gradle.</p>
+
+<div class="highlight highlight-bash"><pre>$ prope <span class="pl-s1"><span class="pl-pds">"</span>&lt;ARGS&gt;<span class="pl-pds">"</span></span>
+<span class="pl-c"><span class="pl-pdc">#</span> usage: &lt;metric-option&gt; &lt;path-to-files&gt;</span>
+
+<span class="pl-c"><span class="pl-pdc">#</span> alternatively</span>
+$ gradlew run -Pargs=<span class="pl-s1"><span class="pl-pds">"</span>&lt;ARGS&gt;<span class="pl-pds">"</span></span>
+</pre></div>
+
+<p><code>&lt;metric-option&gt;</code>: Prope allows for the computation of various types of metrics and the files to be analyzed depend on that type. For that reason, the type of metrics to be computed must be stated on execution. Following options are implemented so far:</p>
+
+<ul>
+<li>
+<code>p</code>: prope computes direct portability metrics, such as weighted elements portability or activity portability, for process files</li>
+<li>
+<code>d</code>: prope computes deployability metrics, such as deployment descriptor size or effort of package construction, for deployment archives</li>
+<li>
+<code>i</code>: prope computes installability metrics for process engines, such as average installation time or installation effort</li>
+<li>
+<code>a</code>: prope computes adaptability metrics for processes, such as binary or weighted adaptability</li>
+</ul>
+
+<p><code>&lt;path-to-files&gt;</code>: Prope parses single files or recursively traverses directory structures, looking for relevant files. Everything that is analyzed in an execution run is aggregated to a result set and written to CSV files, ready to be consumed by MS Excel or R. Prope is forgiving: It tries to analyze as many files as possible, sometimes depending on the type, but if the analysis for a file fails or nothing relevant is found, that file is just ignored.</p>
+
+<div class="highlight highlight-bash"><pre><span class="pl-c"><span class="pl-pdc">#</span> Examples</span>
+<span class="pl-c"><span class="pl-pdc">#</span> Compute portability metrics for a process from the test directory</span>
+$ prope -p src/test/resources/portability/Invoke-Empty.bpel 
+<span class="pl-c"><span class="pl-pdc">#</span> Compute installability metrics from all files of a specific test directory </span>
+$ prope -i src/test/resources/installability/server 
+<span class="pl-c"><span class="pl-pdc">#</span> Compute deployability metrics from all files of a specific test directory </span>
+$ prope -d src/test/resources/installability/deployment 
+<span class="pl-c"><span class="pl-pdc">#</span> Compute adaptability metrics from all files of a specific test directory </span>
+$ prope -a src/test/resources/adaptability </pre></div>
+
+<p>Prope comes with tasks for generation IntelliJ and Eclipse project files</p>
+
+<div class="highlight highlight-bash"><pre><span class="pl-c"><span class="pl-pdc">#</span> Generate project files </span>
+$ gradlew idea <span class="pl-c"><span class="pl-pdc">#</span> Generates Intellij IDEA project files</span>
+$ gradlew eclipse <span class="pl-c"><span class="pl-pdc">#</span> Generates Eclipse project files</span>
+
+<span class="pl-c"><span class="pl-pdc">#</span> Manually purge temporary files</span>
+$ gradlew deleteTmpDir <span class="pl-c"><span class="pl-pdc">#</span> purge temporary files manually</span></pre></div>
+
+<h2>
+<a id="output" class="anchor" href="#output" aria-hidden="true"><span class="octicon octicon-link"></span></a>Output</h2>
+
+<p>Prope produces two different files that are written to the root directory and can be analyzed by statistical tooling:</p>
+
+<ul>
+<li>
+<code>results.csv</code>: A list of all metrics of the selected type and their values for the files analyzed. Values are separated with a semicolon.</li>
+<li>
+<code>raw.csv</code>: A list of raw data from which several metrics of the above metrics can be computed. Values are separated with a semicolon.</li>
+</ul>
+
+<h2>
+<a id="project-structure" class="anchor" href="#project-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project Structure</h2>
+
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/main/java</code></td>
+<td>the main source code</td>
+</tr>
+<tr>
+<td><code>src/main/java/prope/executables</code></td>
+<td>classes that implement the main workflow, such as traversing a directory structure and triggering the metrics computation and reporting</td>
+</tr>
+<tr>
+<td><code>src/main/java/prope/metrics/adaptability</code></td>
+<td>classes for computing adaptability metrics</td>
+</tr>
+<tr>
+<td><code>src/main/java/prope/metrics/installability</code></td>
+<td>classes for computing installability metrics</td>
+</tr>
+<tr>
+<td><code>src/main/java/prope/metrics/portability</code></td>
+<td>classes for computing portability metrics</td>
+</tr>
+<tr>
+<td><code>src/main/java/prope/reporting</code></td>
+<td>classes for writing reports and result files to the file system</td>
+</tr>
+<tr>
+<td><code>src/main/r</code></td>
+<td>scripts written in R that consume the CSV file produced by pete and perform several simple analyses of the data</td>
+</tr>
+<tr>
+<td><code>src/test/java</code></td>
+<td>JUnit tests for prope</td>
+</tr>
+<tr>
+<td><code>src/test/resources</code></td>
+<td>files that are analyzed during the unit tests</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="authors" class="anchor" href="#authors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors</h2>
+
+<p><a href="http://www.uni-bamberg.de/pi/team/lenhard-joerg/">Joerg Lenhard</a></p>
+
+<h2>
+<a id="contribution-guide" class="anchor" href="#contribution-guide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contribution Guide</h2>
+
+<p>Contribution is appreciated! Feel free to open issues. Apart from that, the normal git workflow applies:</p>
+
+<ul>
+<li>Fork</li>
+<li>Send Pull Request</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Prope maintained by <a href="https://github.com/uniba-dsg">uniba-dsg</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
