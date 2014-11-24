@@ -1,5 +1,8 @@
-#load metric data; adjust this to the path of the result file written by pete
-input = read.csv("c:/workspaces/results.csv", sep=";")
+#load metric data; adjust this to the path of the result file written by prope
+analysisFile <- "c:/workspaces/results.csv"
+rawDataFile <- "c:/workspaces/raw.csv"
+
+input = read.csv(analysisFile, sep=";")
 library(Rcmdr)
 
 ds <- subset(input, input$group == "19-05-2014")
@@ -21,14 +24,21 @@ prop.table(summary(sane$isExecutable))
 summary(sane$isExecutable)
 
 # plot element occurences
-constructs = read.csv("c:/workspaces/git/prope/raw.csv")
+constructs = read.csv(rawDataFile, sep=";")
 constructsSorted = constructs[order(constructs$number),]
 constructsRemoved = constructsSorted[(constructsSorted$number > 150),]
 constructsRemoved$number <- (constructsRemoved$number / nrow(ds)) * 100
 list(constructsRemoved)
 par(mar=c(6, 12, 4, 2) + 0.1)
-#barplot(constructsRemoved$number, horiz=TRUE,names.arg=constructsRemoved$element, las=1,cex.names=0.8, xlab="Percentage of Processes", ylab="", xlim=c(0,100), mtext("BPMN Elements", side=2, line=10))
 barplot(constructsRemoved$number, horiz=TRUE,names.arg=constructsRemoved$element, las=1,cex.names=1.5, cex.lab=2, xlab="Percentage of Processes", ylab="", xlim=c(0,100))
+
+#plot with less constructs
+constructsRemoved = constructsSorted[(constructsSorted$number > 300),]
+constructsRemoved$number <- (constructsRemoved$number / nrow(ds)) * 100
+list(constructsRemoved)
+par(mar=c(6, 12, 4, 2) + 0.1)
+barplot(constructsRemoved$number, horiz=TRUE,names.arg=constructsRemoved$element, las=1,cex.names=1.5, cex.lab=1.5, xlab="Percentage of Processes", ylab="", xlim=c(0,100))
+
 
 #group in executable and non-executable
 exec <- subset(sane, sane$isExecutable=='true')
