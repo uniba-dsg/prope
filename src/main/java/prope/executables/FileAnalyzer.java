@@ -22,6 +22,8 @@ public interface FileAnalyzer {
 	 * Notifies the FileAnalyzer that the last file analysis has occured. Can be
 	 * used to perform cleanup operations
 	 */
-	void traversalCompleted();
+	default void traversalCompleted(){
+		// no functionality needed in default implementation
+	}
 
 }
