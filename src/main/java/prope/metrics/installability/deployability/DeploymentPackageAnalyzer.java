@@ -327,9 +327,5 @@ public class DeploymentPackageAnalyzer implements FileAnalyzer {
 		numberOfServices = 0;
 		descriptorPaths = new LinkedList<Path>();
 	}
-
-	@Override
-	public void traversalCompleted() {
-		// Not needed here
-	}
+	
 }
