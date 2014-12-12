@@ -137,7 +137,7 @@ class EventElements extends ElementsCollection {
 		nonInterruptingTimerBoundaryEvent
 				.setLocatorExpression(buildNonInterruptingBoundaryEventXPathExpression("timer"));
 		nonInterruptingTimerBoundaryEvent
-				.addAdaption("A nonInterruptingTimerBoundaryEvent can be adapted to another noninterruptingBoundaryEvent that is triggered in some fashion and represents normal flow, "
+				.setDocumentation("A nonInterruptingTimerBoundaryEvent can be adapted to another noninterruptingBoundaryEvent that is triggered in some fashion and represents normal flow, "
 						+ "as it is possible to calculate the expiration of the time and trigger the event when it does");
 		nonInterruptingTimerBoundaryEvent
 				.addAdaption("noninterruptingSignalBoundaryEvent");
@@ -158,7 +158,7 @@ class EventElements extends ElementsCollection {
 		interruptingTimerBoundaryEvent
 				.setLocatorExpression(buildInterruptingBoundaryEventXPathExpression("timer"));
 		interruptingTimerBoundaryEvent
-				.addAdaption("An interruptingTimerBoundaryEvent can be adapted to another interruptingBoundaryEvent that is triggered in some fashion and represents normal flow, "
+				.setDocumentation("An interruptingTimerBoundaryEvent can be adapted to another interruptingBoundaryEvent that is triggered in some fashion and represents normal flow, "
 						+ "as it is possible to calculate the expiration of the time and trigger the event when it does");
 		interruptingTimerBoundaryEvent
 				.addAdaption("noninterruptingSignalBoundaryEvent");
@@ -310,7 +310,7 @@ class EventElements extends ElementsCollection {
 		multipleBoundaryEvent
 				.setLocatorExpression("//*[local-name() = 'boundaryEvent' and not (@isInterrupting = 'true') and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleBoundaryEvent
-				.addAdaption("A non-interrupting multipleBoundaryEvent can be replaced by multiple non-interrupting boundary events that link to a merging gateway");
+				.setDocumentation("A non-interrupting multipleBoundaryEvent can be replaced by multiple non-interrupting boundary events that link to a merging gateway");
 
 		multipleBoundaryEvent
 				.addAdaption("multipleNonInterruptingBoundaryEventsFollowedByExclusiveGateway");
@@ -327,7 +327,7 @@ class EventElements extends ElementsCollection {
 		multipleBoundaryEvent
 				.setLocatorExpression("//*[local-name() = 'boundaryEvent' and (@isInterrupting = 'true') and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleBoundaryEvent
-				.addAdaption("A interrupting multipleBoundaryEvent can be replaced by multiple interrupting boundary events that link to a merging gateway");
+				.setDocumentation("A interrupting multipleBoundaryEvent can be replaced by multiple interrupting boundary events that link to a merging gateway");
 
 		multipleBoundaryEvent
 				.addAdaption("multipleInterruptingBoundaryEventsFollowedByExclusiveGateway");
@@ -344,7 +344,7 @@ class EventElements extends ElementsCollection {
 		parallelMultipleBoundaryEvent
 				.setLocatorExpression("//*[local-name() = 'boundaryEvent' and not (@isInterrupting = 'true') and (@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		parallelMultipleBoundaryEvent
-				.addAdaption("A multipleParallelBoundaryEvent cannot be adapted since there is no other way to ensure that multiple events are thrown in parallel in the context of a single activity");
+				.setDocumentation("A multipleParallelBoundaryEvent cannot be adapted since there is no other way to ensure that multiple events are thrown in parallel in the context of a single activity");
 		add(parallelMultipleBoundaryEvent);
 	}
 
@@ -354,7 +354,7 @@ class EventElements extends ElementsCollection {
 		parallelMultipleBoundaryEvent
 				.setLocatorExpression("//*[local-name() = 'boundaryEvent' and (@isInterrupting = 'true') and (@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		parallelMultipleBoundaryEvent
-				.addAdaption("A multipleParallelBoundaryEvent cannot be adapted since there is no other way to ensure that multiple events are thrown in paralle in the context of a single activity");
+				.setDocumentation("A multipleParallelBoundaryEvent cannot be adapted since there is no other way to ensure that multiple events are thrown in paralle in the context of a single activity");
 		add(parallelMultipleBoundaryEvent);
 	}
 
@@ -408,7 +408,7 @@ class EventElements extends ElementsCollection {
 		timerCatchEvent
 				.setLocatorExpression(buildIntermediateCatchEventXPathExpression("timer"));
 		timerCatchEvent
-				.addAdaption("A timerStartEvent can be adapted to another catchEvent that is triggered in some fashion and represents normal flow, as it is possible to calculate the expiration of the time and trigger the event when it does");
+				.setDocumentation("A timerStartEvent can be adapted to another catchEvent that is triggered in some fashion and represents normal flow, as it is possible to calculate the expiration of the time and trigger the event when it does");
 		timerCatchEvent.addAdaption("intermediateConditionalCatchEvent");
 		timerCatchEvent.addAdaption("intermediateMessageCatchEvent");
 		timerCatchEvent.addAdaption("intermediateSignalCatchEvent");
@@ -463,7 +463,7 @@ class EventElements extends ElementsCollection {
 		signalThrowEvent
 				.setLocatorExpression(buildIntermediateThrowEventXPathExpression("signal"));
 		signalThrowEvent
-				.addAdaption("A intermediateSignalThrowEvent can be adapted to another intermediateThrowEvent that represents normal flow and is triggered in some fashion");
+				.setDocumentation("A intermediateSignalThrowEvent can be adapted to another intermediateThrowEvent that represents normal flow and is triggered in some fashion");
 		signalThrowEvent.addAdaption("intermediateMessageThrowEvent");
 		signalThrowEvent.addAdaption("intermediateConditionalThrowEvent");
 		signalThrowEvent.addAdaption("intermediateMultipleThrowEvent");
@@ -477,7 +477,7 @@ class EventElements extends ElementsCollection {
 		signalCatchEvent
 				.setLocatorExpression(buildIntermediateThrowEventXPathExpression("catch"));
 		signalCatchEvent
-				.addAdaption("A intermediateSignalCatchEvent can be adapted to another intermediateCatchEvent that represents normal flow and receives a trigger");
+				.setDocumentation("A intermediateSignalCatchEvent can be adapted to another intermediateCatchEvent that represents normal flow and receives a trigger");
 		signalCatchEvent.addAdaption("intermediateMessageCatchEvent");
 		signalCatchEvent.addAdaption("intermediateConditionalCatchEvent");
 		signalCatchEvent.addAdaption("intermediateMultipleCatchEvent");
@@ -491,7 +491,7 @@ class EventElements extends ElementsCollection {
 		multipleThrowEvent
 				.setLocatorExpression("//*[local-name() = 'intermediateThrowEvent' and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleThrowEvent
-				.addAdaption("An intermediateMultipleThrowEvent can be reduced to the available alternative throw events surrounded by a gateways that allow for the selection of one branch");
+				.setDocumentation("An intermediateMultipleThrowEvent can be reduced to the available alternative throw events surrounded by a gateways that allow for the selection of one branch");
 		multipleThrowEvent
 				.addAdaption("intermediateThrowEventsAndExclusiveGateway");
 		multipleThrowEvent
@@ -507,7 +507,7 @@ class EventElements extends ElementsCollection {
 		multipleCatchEvent
 				.setLocatorExpression("//*[local-name() = 'intermediateCatchEvent' and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleCatchEvent
-				.addAdaption("An intermediateMultipleCatchEvent can be reduced to the available alternative catch events surrounded by a gateways that allow for the selection of one branch");
+				.setDocumentation("An intermediateMultipleCatchEvent can be reduced to the available alternative catch events surrounded by a gateways that allow for the selection of one branch");
 
 		multipleCatchEvent
 				.addAdaption("intermediateCatchEventsAndExclusiveGateway");
@@ -524,7 +524,7 @@ class EventElements extends ElementsCollection {
 		multipleParallelCatchEvent
 				.setLocatorExpression("//*[local-name() = 'intermediateCatchEvent' and (@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleParallelCatchEvent
-				.addAdaption("An intermediateMultipleParallelCatchEvent can be reduced to the available alternative catch events surrounded by an gateway that triggers multiple branches");
+				.setDocumentation("An intermediateMultipleParallelCatchEvent can be reduced to the available alternative catch events surrounded by an gateway that triggers multiple branches");
 		multipleParallelCatchEvent
 				.addAdaption("intermediateCatchEventsAndParallelGateway");
 		multipleParallelCatchEvent
@@ -679,7 +679,7 @@ class EventElements extends ElementsCollection {
 		timerStartEvent
 				.setLocatorExpression(buildEventSubProcessNonInterruptingStartEventXPathExpression("timer"));
 		timerStartEvent
-				.addAdaption("A timerStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion, as it is possible to calculate the expiration of the time and trigger the event when it does");
+				.setDocumentation("A timerStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion, as it is possible to calculate the expiration of the time and trigger the event when it does");
 
 		timerStartEvent.addAdaption("signalStartEvent");
 		timerStartEvent.addAdaption("conditionalStartEvent");
@@ -695,7 +695,7 @@ class EventElements extends ElementsCollection {
 		timerStartEvent
 				.setLocatorExpression(buildEventSubProcessInterruptingStartEventXPathExpression("timer"));
 		timerStartEvent
-				.addAdaption("A timerStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion, as it is possible to calculate the expiration of the time and trigger the event when it does");
+				.setDocumentation("A timerStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion, as it is possible to calculate the expiration of the time and trigger the event when it does");
 
 		timerStartEvent.addAdaption("messageStartEvent");
 		timerStartEvent.addAdaption("signalStartEvent");
@@ -711,7 +711,7 @@ class EventElements extends ElementsCollection {
 		multipleStartEvent
 				.setLocatorExpression("//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and (@isInterrupting = 'true') and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleStartEvent
-				.addAdaption("An interrupting multipleStartEvent can be adapted to multiple different eventSubProcesses with one startEvent each");
+				.setDocumentation("An interrupting multipleStartEvent can be adapted to multiple different eventSubProcesses with one startEvent each");
 
 		multipleStartEvent
 				.addAdaption("multipleEventSubProcessesWithSingleStartEvents");
@@ -725,7 +725,7 @@ class EventElements extends ElementsCollection {
 		multipleStartEvent
 				.setLocatorExpression("//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and not (@isInterrupting = 'true') and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleStartEvent
-				.addAdaption("An non-interrupting multipleStartEvent can be adapted to multiple different eventSubProcesses with one startEvent each");
+				.setDocumentation("An non-interrupting multipleStartEvent can be adapted to multiple different eventSubProcesses with one startEvent each");
 
 		multipleStartEvent
 				.addAdaption("multipleEventSubProcessesWithSingleStartEvents");
@@ -738,7 +738,7 @@ class EventElements extends ElementsCollection {
 		parallelMultipleStartEvent
 				.setLocatorExpression("//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and (@isInterrupting = 'true') and (@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		parallelMultipleStartEvent
-				.addAdaption("A multipleParallelStartEvent cannot be adapted since there is no other way to avoid the instantiation of a process unless multiple conditions are satisfied");
+				.setDocumentation("A multipleParallelStartEvent cannot be adapted since there is no other way to avoid the instantiation of a process unless multiple conditions are satisfied");
 		add(parallelMultipleStartEvent);
 	}
 
@@ -748,7 +748,7 @@ class EventElements extends ElementsCollection {
 		parallelMultipleStartEvent
 				.setLocatorExpression("//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and not (@isInterrupting = 'true') and (@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		parallelMultipleStartEvent
-				.addAdaption("A multipleParallelStartEvent cannot be adapted since there is no other way to avoid the instantiation of a process unless multiple conditions are satisfied");
+				.setDocumentation("A multipleParallelStartEvent cannot be adapted since there is no other way to avoid the instantiation of a process unless multiple conditions are satisfied");
 		add(parallelMultipleStartEvent);
 	}
 
@@ -842,7 +842,7 @@ class EventElements extends ElementsCollection {
 		messageStartEvent
 				.setLocatorExpression(buildStartEventXPathExpression("message"));
 		messageStartEvent
-				.addAdaption("A messageStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion.");
+				.setDocumentation("A messageStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion.");
 		messageStartEvent.addAdaption("conditionalStartEvent");
 		messageStartEvent.addAdaption("signalStartEvent");
 		messageStartEvent.addAdaption("multipleStartEvent");
@@ -856,7 +856,7 @@ class EventElements extends ElementsCollection {
 		timerStartEvent
 				.setLocatorExpression(buildStartEventXPathExpression("timer"));
 		timerStartEvent
-				.addAdaption("A timerStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion, as it is possible to calculate the expiration of the time and trigger the event when it does");
+				.setDocumentation("A timerStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion, as it is possible to calculate the expiration of the time and trigger the event when it does");
 		timerStartEvent.addAdaption("conditionalStartEvent");
 		timerStartEvent.addAdaption("messageStartEvent");
 		timerStartEvent.addAdaption("signalStartEvent");
@@ -871,7 +871,7 @@ class EventElements extends ElementsCollection {
 		conditionalStartEvent
 				.setLocatorExpression(buildStartEventXPathExpression("conditional"));
 		conditionalStartEvent
-				.addAdaption("A conditionalStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion");
+				.setDocumentation("A conditionalStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion");
 		conditionalStartEvent.addAdaption("messageStartEvent");
 		conditionalStartEvent.addAdaption("signalStartEvent");
 		conditionalStartEvent.addAdaption("multipleStartEvent");
@@ -885,7 +885,7 @@ class EventElements extends ElementsCollection {
 		signalStartEvent
 				.setLocatorExpression(buildStartEventXPathExpression("signal"));
 		signalStartEvent
-				.addAdaption("A signalStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion");
+				.setDocumentation("A signalStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion");
 		signalStartEvent.addAdaption("messageStartEvent");
 		signalStartEvent.addAdaption("conditionalStartEvent");
 		signalStartEvent.addAdaption("multipleStartEvent");
@@ -899,7 +899,7 @@ class EventElements extends ElementsCollection {
 		multipleStartEvent
 				.setLocatorExpression("//*[local-name() = 'startEvent' and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleStartEvent
-				.addAdaption("A multipleStartEvent can be reduced to one of the available alternative start events");
+				.setDocumentation("A multipleStartEvent can be reduced to one of the available alternative start events");
 		// start events gefolgt von exclusive gateway
 
 		add(multipleStartEvent);
@@ -911,7 +911,7 @@ class EventElements extends ElementsCollection {
 		multipleParallelStartEvent
 				.setLocatorExpression("//*[local-name() = 'startEvent' and @parallelMultiple = 'true' and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleParallelStartEvent
-				.addAdaption("A multipleParallelStartEvent cannot be adapted since there is no other way to avoid the instantiation of a process unless multiple conditions are satisfied");
+				.setDocumentation("A multipleParallelStartEvent cannot be adapted since there is no other way to avoid the instantiation of a process unless multiple conditions are satisfied");
 
 		add(multipleParallelStartEvent);
 	}
@@ -922,7 +922,7 @@ class EventElements extends ElementsCollection {
 		subProcessStartEvent
 				.setLocatorExpression("//*[local-name() = 'subProcess' and not(@triggeredByEvent = 'true')]/*[local-name() = 'startEvent']");
 		subProcessStartEvent
-				.addAdaption("A startEvent of an ordinary subProcess cannot be adapted since it is the only way of starting non-eventSubProcesses");
+				.setDocumentation("A startEvent of an ordinary subProcess cannot be adapted since it is the only way of starting non-eventSubProcesses");
 		add(subProcessStartEvent);
 	}
 
