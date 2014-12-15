@@ -101,7 +101,7 @@ class EventElements extends ElementsCollection {
 		interruptingMessageBoundaryEvent
 				.setLocatorExpression(buildInterruptingBoundaryEventXPathExpression("message"));
 		interruptingMessageBoundaryEvent
-				.setDocumentation("An interrupting boundary message event can be adapted to another interrupting boundary event that transmits a signal and represents normal flow");
+				.setDocumentation("An interruptingMessageBoundaryEvent can be adapted to another interrupting boundary event that fires a signal and leads to normal control-flow continuation");
 		interruptingMessageBoundaryEvent
 				.addAdaption("interruptingSignalBoundaryEvent");
 		interruptingMessageBoundaryEvent
@@ -119,7 +119,7 @@ class EventElements extends ElementsCollection {
 		nonInterruptingMessageBoundaryEvent
 				.setLocatorExpression(buildNonInterruptingBoundaryEventXPathExpression("message"));
 		nonInterruptingMessageBoundaryEvent
-				.setDocumentation("An non-interrupting boundary message event can be adapted to another non-interrupting boundary event that transmits a signal and represents normal flow");
+				.setDocumentation("An nonInterruptingMessageBoundaryEvent can be adapted to another non-interrupting boundary event that transmits a signal and represents normal control-flow continuation");
 		nonInterruptingMessageBoundaryEvent
 				.addAdaption("nonInterruptingSignalBoundaryEvent");
 		nonInterruptingMessageBoundaryEvent
@@ -137,8 +137,8 @@ class EventElements extends ElementsCollection {
 		nonInterruptingTimerBoundaryEvent
 				.setLocatorExpression(buildNonInterruptingBoundaryEventXPathExpression("timer"));
 		nonInterruptingTimerBoundaryEvent
-				.setDocumentation("A nonInterruptingTimerBoundaryEvent can be adapted to another noninterruptingBoundaryEvent that is triggered in some fashion and represents normal flow, "
-						+ "as it is possible to calculate the expiration of the time and trigger the event when it does");
+				.setDocumentation("A nonInterruptingTimerBoundaryEvent can be adapted to another non-interrupting boundary event that represents normal control-flow continuation and is fired by a trigger, "
+						+ "as it is possible to calculate the expiration of the temporal condition and trigger the event when it occurs");
 		nonInterruptingTimerBoundaryEvent
 				.addAdaption("noninterruptingSignalBoundaryEvent");
 		nonInterruptingTimerBoundaryEvent
@@ -158,20 +158,20 @@ class EventElements extends ElementsCollection {
 		interruptingTimerBoundaryEvent
 				.setLocatorExpression(buildInterruptingBoundaryEventXPathExpression("timer"));
 		interruptingTimerBoundaryEvent
-				.setDocumentation("An interruptingTimerBoundaryEvent can be adapted to another interruptingBoundaryEvent that is triggered in some fashion and represents normal flow, "
-						+ "as it is possible to calculate the expiration of the time and trigger the event when it does");
+				.setDocumentation("An interruptingTimerBoundaryEvent can be adapted to another interruptingBoundaryEvent that leads to normal control-flow continuation and fires a trigger, "
+						+ "as it is possible to calculate the expiration of the temporal condition and trigger the event when it occurs");
 		interruptingTimerBoundaryEvent
-				.addAdaption("noninterruptingSignalBoundaryEvent");
+				.addAdaption("interruptingSignalBoundaryEvent");
 		interruptingTimerBoundaryEvent
-				.addAdaption("noninterruptingConditionalBoundaryEvent");
+				.addAdaption("interruptingConditionalBoundaryEvent");
 		interruptingTimerBoundaryEvent
-				.addAdaption("noninterruptingMessageBoundaryEvent");
+				.addAdaption("interruptingMessageBoundaryEvent");
 		interruptingTimerBoundaryEvent
-				.addAdaption("noninterruptingSignalBoundaryEvent");
+				.addAdaption("interruptingSignalBoundaryEvent");
 		interruptingTimerBoundaryEvent
-				.addAdaption("noninterruptingMultipleBoundaryEvent");
+				.addAdaption("interruptingMultipleBoundaryEvent");
 		interruptingTimerBoundaryEvent
-				.addAdaption("noninterruptingParallelMultipleBoundaryEvent");
+				.addAdaption("interruptingParallelMultipleBoundaryEvent");
 		add(interruptingTimerBoundaryEvent);
 	}
 
@@ -181,8 +181,8 @@ class EventElements extends ElementsCollection {
 		escalationBoundaryEvent
 				.setLocatorExpression(buildNonInterruptingBoundaryEventXPathExpression("escalation"));
 		escalationBoundaryEvent
-				.setDocumentation("A non-interrupting escalation boundary event cannot be adapted since there is no other non-interrupting boundary event that represents exceptional flow"
-						+ "Errors are only interrupting");
+				.setDocumentation("A nonInterruptingEscalationBoundaryEvent cannot be adapted since there is no other non-interrupting boundary event that leads to exceptional control-flow continuation"
+						+ " Errors events are only interrupting");
 
 		add(escalationBoundaryEvent);
 	}
@@ -193,7 +193,7 @@ class EventElements extends ElementsCollection {
 		interruptingEscalationBoundaryEvent
 				.setLocatorExpression(buildInterruptingBoundaryEventXPathExpression("escalation"));
 		interruptingEscalationBoundaryEvent
-				.setDocumentation("An interrupting escalation boundary event can be adapted to another interrupting boundary event that represents exceptional flow");
+				.setDocumentation("An interruptingEscalationBoundaryEvent can be adapted to another interrupting boundary event that leads to exceptional control-flow continuation");
 
 		interruptingEscalationBoundaryEvent
 				.addAdaption("interruptingErrorBoundaryEvent");
@@ -210,7 +210,7 @@ class EventElements extends ElementsCollection {
 		errorBoundaryEvent
 				.setLocatorExpression(buildInterruptingBoundaryEventXPathExpression("error"));
 		errorBoundaryEvent
-				.setDocumentation("An interrupting error boundary event can be adapted to another interrupting boundary event that represents exceptional flow");
+				.setDocumentation("An interruptingErrorBoundaryEvent can be adapted to another interrupting boundary event that leads to exceptional control-flow continuation");
 		errorBoundaryEvent.addAdaption("interruptingEscalationBoundaryEvent");
 		errorBoundaryEvent.addAdaption("interruptingMultipleBoundaryEvent");
 		errorBoundaryEvent
@@ -224,7 +224,7 @@ class EventElements extends ElementsCollection {
 		cancelBoundaryEvent
 				.setLocatorExpression(buildInterruptingBoundaryEventXPathExpression("cancel"));
 		cancelBoundaryEvent
-				.setDocumentation("An interrupting cancel boundary event cannot be adapted since its semantics with respect to transactions are unique");
+				.setDocumentation("An interruptingCancelBoundaryEvent cannot be adapted since its semantics with respect to transaction cancelation are unique");
 		add(cancelBoundaryEvent);
 	}
 
@@ -234,7 +234,7 @@ class EventElements extends ElementsCollection {
 		compensationBoundaryEvent
 				.setLocatorExpression(buildInterruptingBoundaryEventXPathExpression("cancel"));
 		compensationBoundaryEvent
-				.setDocumentation("An interrupting compensation boundary event cannot be adapted since its semantics with respect to compensation are unique");
+				.setDocumentation("An interruptingCompensationBoundaryEvent cannot be adapted since its semantics with respect to compensation are unique");
 		add(compensationBoundaryEvent);
 	}
 
@@ -244,7 +244,7 @@ class EventElements extends ElementsCollection {
 		conditionalBoundaryEvent
 				.setLocatorExpression(buildNonInterruptingBoundaryEventXPathExpression("conditional"));
 		conditionalBoundaryEvent
-				.setDocumentation("A non-interrupting conditional boundary event can be adapted to another non-interrupting boundary event that represents normal flow");
+				.setDocumentation("A nonInterruptingConditionalBoundaryEvent can be adapted to another non-interrupting boundary event that leads to normal control-flow continuation");
 		conditionalBoundaryEvent
 				.addAdaption("nonInterruptingSignalBoundaryEvent");
 		conditionalBoundaryEvent
@@ -262,7 +262,7 @@ class EventElements extends ElementsCollection {
 		conditionalBoundaryEvent
 				.setLocatorExpression(buildInterruptingBoundaryEventXPathExpression("conditional"));
 		conditionalBoundaryEvent
-				.setDocumentation("An interrupting conditional boundary event can be adapted to another interrupting boundary event that represents normal flow");
+				.setDocumentation("An interruptingConditionalBoundaryEvent can be adapted to another interrupting boundary event that represents normal control-flow continuation");
 		conditionalBoundaryEvent.addAdaption("interruptingSignalBoundaryEvent");
 		conditionalBoundaryEvent
 				.addAdaption("interruptingMessageBoundaryEvent");
@@ -279,7 +279,7 @@ class EventElements extends ElementsCollection {
 		signalBoundaryEvent
 				.setLocatorExpression(buildNonInterruptingBoundaryEventXPathExpression("signal"));
 		signalBoundaryEvent
-				.setDocumentation("A non-interrupting signal boundary event can be adapted to another non-interrupting boundary event that represents normal flow");
+				.setDocumentation("A nonInterruptingSignalBoundaryEvent can be adapted to another non-interrupting boundary event that leads to normal control-flow continuation");
 		signalBoundaryEvent.addAdaption("nonInterruptingMessageBoundaryEvent");
 		signalBoundaryEvent
 				.addAdaption("nonInterruptingConditionalBoundaryEvent");
@@ -295,7 +295,7 @@ class EventElements extends ElementsCollection {
 		signalBoundaryEvent
 				.setLocatorExpression(buildInterruptingBoundaryEventXPathExpression("signal"));
 		signalBoundaryEvent
-				.setDocumentation("An interrupting signal boundary event can be adapted to another interrupting boundary event that represents normal flow");
+				.setDocumentation("An interrupting signal boundary event can be adapted to another interrupting boundary event that represents normal control-flow continuation");
 		signalBoundaryEvent.addAdaption("interruptingMessageBoundaryEvent");
 		signalBoundaryEvent.addAdaption("interruptingConditionalBoundaryEvent");
 		signalBoundaryEvent.addAdaption("interruptingMultipleBoundaryEvent");
@@ -310,7 +310,7 @@ class EventElements extends ElementsCollection {
 		multipleBoundaryEvent
 				.setLocatorExpression("//*[local-name() = 'boundaryEvent' and not (@isInterrupting = 'true') and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleBoundaryEvent
-				.setDocumentation("A non-interrupting multipleBoundaryEvent can be replaced by multiple non-interrupting boundary events that link to a merging gateway");
+				.setDocumentation("A nonInterruptingMultipleBoundaryEvent can be adapted by multiple non-interrupting boundary events that link to a merging gateway");
 
 		multipleBoundaryEvent
 				.addAdaption("multipleNonInterruptingBoundaryEventsFollowedByExclusiveGateway");
@@ -327,7 +327,7 @@ class EventElements extends ElementsCollection {
 		multipleBoundaryEvent
 				.setLocatorExpression("//*[local-name() = 'boundaryEvent' and (@isInterrupting = 'true') and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleBoundaryEvent
-				.setDocumentation("A interrupting multipleBoundaryEvent can be replaced by multiple interrupting boundary events that link to a merging gateway");
+				.setDocumentation("A interruptingMultipleBoundaryEvent can be adapted by multiple interrupting boundary events that link to a merging gateway");
 
 		multipleBoundaryEvent
 				.addAdaption("multipleInterruptingBoundaryEventsFollowedByExclusiveGateway");
@@ -354,7 +354,7 @@ class EventElements extends ElementsCollection {
 		parallelMultipleBoundaryEvent
 				.setLocatorExpression("//*[local-name() = 'boundaryEvent' and (@isInterrupting = 'true') and (@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		parallelMultipleBoundaryEvent
-				.setDocumentation("A multipleParallelBoundaryEvent cannot be adapted since there is no other way to ensure that multiple events are thrown in paralle in the context of a single activity");
+				.setDocumentation("A multipleParallelBoundaryEvent cannot be adapted since there is no other way to ensure that multiple events are thrown in parallel in the context of a single activity");
 		add(parallelMultipleBoundaryEvent);
 	}
 
@@ -364,7 +364,8 @@ class EventElements extends ElementsCollection {
 		noneThrowEvent
 				.setLocatorExpression("//*[local-name() = 'intermediateThrowEvent' and not(child::*[contains(local-name(),'ventDefinition')])]");
 		noneThrowEvent
-				.setDocumentation("This event can be adapted to another intermediateThrowEvent used in normal flow or simply be ignored");
+				.setDocumentation("An intermediateNoneThrowEvent can be adapted to another intermediateThrowEvent that leads to normal control-flow continuation. "
+						+ "Lacking a specific signal that can be caught, the event can also be ignored");
 
 		noneThrowEvent.addAdaption("deleteEvent");
 		noneThrowEvent.addAdaption("intermediateMessageThrowEvent");
@@ -380,7 +381,7 @@ class EventElements extends ElementsCollection {
 		messageThrowEvent
 				.setLocatorExpression(buildIntermediateThrowEventXPathExpression("message"));
 		messageThrowEvent
-				.setDocumentation("This event can be adapted to a sendTask or another intermediateThrowEvent used in normal flow that provides a trigger");
+				.setDocumentation("This event can be adapted to a sendTask or another intermediateThrowEvent used in normal control-flow that provides a signal");
 		messageThrowEvent.addAdaption("intermediateSignalThrowEvent");
 		messageThrowEvent.addAdaption("sendTask");
 		messageThrowEvent.addAdaption("intermediateMultipleThrowEvent");
@@ -394,7 +395,7 @@ class EventElements extends ElementsCollection {
 		messageCatchEvent
 				.setLocatorExpression(buildIntermediateCatchEventXPathExpression("message"));
 		messageCatchEvent
-				.setDocumentation("This event can be adapted to another intermediateCatchEvent used in normal flow that consumes a trigger");
+				.setDocumentation("An intermediateMessageCatchEvent can be adapted to another intermediateCatchEvent used in normal control-flow that consumes a trigger");
 		messageCatchEvent.addAdaption("intermediateSignalCatchEvent");
 		messageCatchEvent.addAdaption("receiveTask");
 		messageCatchEvent.addAdaption("intermediateMultipleCatchEvent");
@@ -408,7 +409,7 @@ class EventElements extends ElementsCollection {
 		timerCatchEvent
 				.setLocatorExpression(buildIntermediateCatchEventXPathExpression("timer"));
 		timerCatchEvent
-				.setDocumentation("A timerStartEvent can be adapted to another catchEvent that is triggered in some fashion and represents normal flow, as it is possible to calculate the expiration of the time and trigger the event when it does");
+				.setDocumentation("An intermediateTimerCatchEvent can be adapted to another intermediate catchEvent that has a trigger and leads to normal control-flow continuation, as it is possible to calculate the expiration of the time and trigger the event when it occurs");
 		timerCatchEvent.addAdaption("intermediateConditionalCatchEvent");
 		timerCatchEvent.addAdaption("intermediateMessageCatchEvent");
 		timerCatchEvent.addAdaption("intermediateSignalCatchEvent");
@@ -423,7 +424,7 @@ class EventElements extends ElementsCollection {
 		escalationThrowEvent
 				.setLocatorExpression(buildIntermediateThrowEventXPathExpression("escalation"));
 		escalationThrowEvent
-				.setDocumentation("A intermediate escalation event can be adapted to another intermediate event that represents exceptional flow and uses an active trigger");
+				.setDocumentation("A intermediateEscalationThrowEvent can be adapted to another intermediate throw event that leads to exceptional control-flow continuation and is fired by a trigger");
 		escalationThrowEvent.addAdaption("intermediateMessageThrowEvent");
 		escalationThrowEvent.addAdaption("intermediateSignalThrowEvent");
 		escalationThrowEvent.addAdaption("intermediateMultipleThrowEvent");
@@ -438,7 +439,7 @@ class EventElements extends ElementsCollection {
 		compensationThrowEvent
 				.setLocatorExpression(buildIntermediateThrowEventXPathExpression("compensation"));
 		compensationThrowEvent
-				.setDocumentation("A intermediate compensation event cannot be adapted since there is no other intermediate throwing event with compensation semantics");
+				.setDocumentation("An intermediateCompensationThrowEvent cannot be adapted since there is no other intermediate throw event with compensation semantics");
 		add(compensationThrowEvent);
 	}
 
@@ -448,7 +449,7 @@ class EventElements extends ElementsCollection {
 		conditionalCatchEvent
 				.setLocatorExpression(buildIntermediateCatchEventXPathExpression("conditional"));
 		conditionalCatchEvent
-				.setDocumentation("An intermediate conditional catch event can be adapted to another intermediate catch event that represents normal flow");
+				.setDocumentation("An intermediateConditionalCatchEvent can be adapted to another intermediate catch event that triggers normal control-flow continuation");
 		conditionalCatchEvent.addAdaption("intermediateSignalCatchEvent");
 		conditionalCatchEvent.addAdaption("intermediateMessageCatchEvent");
 		conditionalCatchEvent.addAdaption("intermediateMultipleCatchEvent");
@@ -463,7 +464,7 @@ class EventElements extends ElementsCollection {
 		signalThrowEvent
 				.setLocatorExpression(buildIntermediateThrowEventXPathExpression("signal"));
 		signalThrowEvent
-				.setDocumentation("A intermediateSignalThrowEvent can be adapted to another intermediateThrowEvent that represents normal flow and is triggered in some fashion");
+				.setDocumentation("A intermediateSignalThrowEvent can be adapted to another intermediate throw event that leads to normal control-flow continuation and fires a trigger");
 		signalThrowEvent.addAdaption("intermediateMessageThrowEvent");
 		signalThrowEvent.addAdaption("intermediateConditionalThrowEvent");
 		signalThrowEvent.addAdaption("intermediateMultipleThrowEvent");
@@ -477,7 +478,7 @@ class EventElements extends ElementsCollection {
 		signalCatchEvent
 				.setLocatorExpression(buildIntermediateThrowEventXPathExpression("catch"));
 		signalCatchEvent
-				.setDocumentation("A intermediateSignalCatchEvent can be adapted to another intermediateCatchEvent that represents normal flow and receives a trigger");
+				.setDocumentation("A intermediateSignalCatchEvent can be adapted to another intermediateCatchEvent that is used in normal control-flow and catches a trigger");
 		signalCatchEvent.addAdaption("intermediateMessageCatchEvent");
 		signalCatchEvent.addAdaption("intermediateConditionalCatchEvent");
 		signalCatchEvent.addAdaption("intermediateMultipleCatchEvent");
@@ -507,7 +508,7 @@ class EventElements extends ElementsCollection {
 		multipleCatchEvent
 				.setLocatorExpression("//*[local-name() = 'intermediateCatchEvent' and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleCatchEvent
-				.setDocumentation("An intermediateMultipleCatchEvent can be reduced to the available alternative catch events surrounded by a gateways that allow for the selection of one branch");
+				.setDocumentation("An intermediateMultipleCatchEvent can be reduced to the available alternative catch events surrounded by gateways that allow for the selection of one among a set of branches");
 
 		multipleCatchEvent
 				.addAdaption("intermediateCatchEventsAndExclusiveGateway");
@@ -524,7 +525,7 @@ class EventElements extends ElementsCollection {
 		multipleParallelCatchEvent
 				.setLocatorExpression("//*[local-name() = 'intermediateCatchEvent' and (@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleParallelCatchEvent
-				.setDocumentation("An intermediateMultipleParallelCatchEvent can be reduced to the available alternative catch events surrounded by an gateway that triggers multiple branches");
+				.setDocumentation("An intermediateMultipleParallelCatchEvent can be reduced to the available alternative catch events surrounded by an gateway that triggers multiple parallel branches");
 		multipleParallelCatchEvent
 				.addAdaption("intermediateCatchEventsAndParallelGateway");
 		multipleParallelCatchEvent
@@ -540,7 +541,7 @@ class EventElements extends ElementsCollection {
 		nonInterruptingMessageStartEvent
 				.setLocatorExpression(buildEventSubProcessNonInterruptingStartEventXPathExpression("message"));
 		nonInterruptingMessageStartEvent
-				.setDocumentation("A non-interrupting message start event can be adapted to another non-interrupting start event that represents normal flow");
+				.setDocumentation("A nonInterruptingMessageStartEvent can be adapted to another non-interrupting start event that leads to normal control-flow continuation");
 
 		nonInterruptingMessageStartEvent.addAdaption("signalStartEvent");
 		nonInterruptingMessageStartEvent.addAdaption("conditionalStartEvent");
@@ -556,7 +557,7 @@ class EventElements extends ElementsCollection {
 		interruptingMessageStartEvent
 				.setLocatorExpression(buildEventSubProcessInterruptingStartEventXPathExpression("message"));
 		interruptingMessageStartEvent
-				.setDocumentation("An interrupting message start event can be adapted to another interrupting start event that represents normal flow");
+				.setDocumentation("An interruptingMessageStart event can be adapted to another interrupting start event that leads to normal control-flow continuation");
 
 		interruptingMessageStartEvent.addAdaption("signalStartEvent");
 		interruptingMessageStartEvent.addAdaption("conditionalStartEvent");
@@ -571,7 +572,7 @@ class EventElements extends ElementsCollection {
 		signalStartEvent
 				.setLocatorExpression(buildEventSubProcessNonInterruptingStartEventXPathExpression("signal"));
 		signalStartEvent
-				.setDocumentation("A non-interrupting signal start event can be adapted to another non-interrupting start event that represents normal flow");
+				.setDocumentation("A nonInterruptingSignalStartEvent can be adapted to another non-interrupting start event that represents normal process instantiation");
 
 		signalStartEvent.addAdaption("messageStartEvent");
 		signalStartEvent.addAdaption("conditionalStartEvent");
@@ -586,7 +587,7 @@ class EventElements extends ElementsCollection {
 		signalStartEvent
 				.setLocatorExpression(buildEventSubProcessInterruptingStartEventXPathExpression("signal"));
 		signalStartEvent
-				.setDocumentation("An interrupting signal start event can be adapted to another interrupting start event that represents normal flow");
+				.setDocumentation("An interruptingSignalStartEvent can be adapted to another interrupting start event that represents normal process instantiation");
 
 		signalStartEvent.addAdaption("messageStartEvent");
 		signalStartEvent.addAdaption("conditionalStartEvent");
@@ -601,7 +602,7 @@ class EventElements extends ElementsCollection {
 		conditionalStartEvent
 				.setLocatorExpression(buildEventSubProcessNonInterruptingStartEventXPathExpression("conditional"));
 		conditionalStartEvent
-				.setDocumentation("A non-interrupting conditional start event can be adapted to another non-interrupting start event that uses represents normal flow");
+				.setDocumentation("A nonInterruptingConditionalStartEvent can be adapted to another non-interrupting start event that uses represents normal control-flow continuation");
 
 		conditionalStartEvent.addAdaption("signalStartEvent");
 		conditionalStartEvent.addAdaption("messageStartEvent");
@@ -616,7 +617,7 @@ class EventElements extends ElementsCollection {
 		conditionalStartEvent
 				.setLocatorExpression(buildEventSubProcessInterruptingStartEventXPathExpression("conditional"));
 		conditionalStartEvent
-				.setDocumentation("An interrupting conditional start event can be adapted to another interrupting start event that represents normal flow");
+				.setDocumentation("An interruptingConditionalStartEvent can be adapted to another interrupting start event that represents normal control-flow");
 
 		conditionalStartEvent.addAdaption("signalStartEvent");
 		conditionalStartEvent.addAdaption("messageStartEvent");
@@ -631,7 +632,7 @@ class EventElements extends ElementsCollection {
 		errorStartEvent
 				.setLocatorExpression(buildEventSubProcessInterruptingStartEventXPathExpression("error"));
 		errorStartEvent
-				.setDocumentation("An interrupting error start event can be adapted to another interrupting start event that represents exceptional flow");
+				.setDocumentation("An interruptingErrorStartEvent can be adapted to another interrupting start event that leads to exceptional control-flow continuation");
 		errorStartEvent.addAdaption("escalationStartEvent");
 		errorStartEvent.addAdaption("multipleStartEvent");
 		errorStartEvent.addAdaption("multipleParallelStartEvent");
@@ -644,7 +645,7 @@ class EventElements extends ElementsCollection {
 		compensationStartEvent
 				.setLocatorExpression(buildEventSubProcessInterruptingStartEventXPathExpression("compensation"));
 		compensationStartEvent
-				.setDocumentation("A compensation start event cannot be adapted since there is no alternative mechanism to trigger the compensation of a process that has completed");
+				.setDocumentation("A compensationStartEvent cannot be adapted since there is no alternative start event with compensational semantics");
 		add(compensationStartEvent);
 	}
 
@@ -654,7 +655,7 @@ class EventElements extends ElementsCollection {
 		escalationStartEvent
 				.setLocatorExpression(buildEventSubProcessNonInterruptingStartEventXPathExpression("escalation"));
 		escalationStartEvent
-				.setDocumentation("A non-interrupting escalation start event cannot be adapted since other non-interrupting start event that represents exceptional flow.");
+				.setDocumentation("A nonInterruptingEscalationStartEvent cannot be adapted since other non-interrupting start event that represents exceptional control-flow continuation");
 		add(escalationStartEvent);
 	}
 
@@ -664,7 +665,7 @@ class EventElements extends ElementsCollection {
 		interruptingEscalationStartEvent
 				.setLocatorExpression(buildEventSubProcessInterruptingStartEventXPathExpression("escalation"));
 		interruptingEscalationStartEvent
-				.setDocumentation("An interrupting escalation start event can be adapted to another interrupting start event that represents exceptional flow");
+				.setDocumentation("An interruptingEscalationStartEvent can be adapted to another interrupting start event that leads to exceptional control-flow continuation");
 
 		interruptingEscalationStartEvent.addAdaption("errorStartEvent");
 		interruptingEscalationStartEvent.addAdaption("multipleStartEvent");
@@ -679,7 +680,7 @@ class EventElements extends ElementsCollection {
 		timerStartEvent
 				.setLocatorExpression(buildEventSubProcessNonInterruptingStartEventXPathExpression("timer"));
 		timerStartEvent
-				.setDocumentation("A timerStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion, as it is possible to calculate the expiration of the time and trigger the event when it does");
+				.setDocumentation("A nonInterruptingTimerStartEvent can be adapted to another startEvent that represents normal control-flow and is fired through a trigger, as it is possible to calculate the expiration of the temporal condition and fire the trigger the event when it occurs");
 
 		timerStartEvent.addAdaption("signalStartEvent");
 		timerStartEvent.addAdaption("conditionalStartEvent");
@@ -695,7 +696,7 @@ class EventElements extends ElementsCollection {
 		timerStartEvent
 				.setLocatorExpression(buildEventSubProcessInterruptingStartEventXPathExpression("timer"));
 		timerStartEvent
-				.setDocumentation("A timerStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion, as it is possible to calculate the expiration of the time and trigger the event when it does");
+				.setDocumentation("A interruptingTimerStartEvent can be adapted to another startEvent that leads to normal control-flow continuation and requires a trigger, as it is possible to calculate the expiration of the temporal condition and trigger the event when it occurs");
 
 		timerStartEvent.addAdaption("messageStartEvent");
 		timerStartEvent.addAdaption("signalStartEvent");
@@ -711,7 +712,7 @@ class EventElements extends ElementsCollection {
 		multipleStartEvent
 				.setLocatorExpression("//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and (@isInterrupting = 'true') and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleStartEvent
-				.setDocumentation("An interrupting multipleStartEvent can be adapted to multiple different eventSubProcesses with one startEvent each");
+				.setDocumentation("An interruptingMultipleStartEvent can be adapted to multiple different eventSubProcesses with one start event each");
 
 		multipleStartEvent
 				.addAdaption("multipleEventSubProcessesWithSingleStartEvents");
@@ -725,7 +726,7 @@ class EventElements extends ElementsCollection {
 		multipleStartEvent
 				.setLocatorExpression("//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and not (@isInterrupting = 'true') and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleStartEvent
-				.setDocumentation("An non-interrupting multipleStartEvent can be adapted to multiple different eventSubProcesses with one startEvent each");
+				.setDocumentation("A nonInterruptingMultipleStartEvent can be adapted to multiple different eventSubProcesses with one startEvent each");
 
 		multipleStartEvent
 				.addAdaption("multipleEventSubProcessesWithSingleStartEvents");
@@ -758,7 +759,7 @@ class EventElements extends ElementsCollection {
 		messageEndEvent
 				.setLocatorExpression(buildEndEventXPathExpression("message"));
 		messageEndEvent
-				.setDocumentation("A messageEndEvent can be adapted to another type of endEvent that can refer to normal termination and produces a trigger");
+				.setDocumentation("A messageEndEvent can be adapted to another type of endEvent that refers to ordered termination and produces a trigger");
 		messageEndEvent.addAdaption("signalEndEvent");
 		messageEndEvent.addAdaption("multipleEndEvent");
 		add(messageEndEvent);
@@ -779,7 +780,7 @@ class EventElements extends ElementsCollection {
 		escalationEndEvent
 				.setLocatorExpression(buildEndEventXPathExpression("escalation"));
 		escalationEndEvent
-				.setDocumentation("There is no equivalent for this end event, since it does not terminate all active threads and signals a problem");
+				.setDocumentation("There is no equivalent for this end event, since it does not terminate all active threads and, at the same time, signals a problem");
 		add(escalationEndEvent);
 	}
 
@@ -807,7 +808,7 @@ class EventElements extends ElementsCollection {
 		signalEndEvent
 				.setLocatorExpression(buildEndEventXPathExpression("signal"));
 		signalEndEvent
-				.setDocumentation("A signalEndEvent can be adapted to another type of endEvent that can refer to normal termination and produces a trigger");
+				.setDocumentation("A signalEndEvent can be adapted to another type of endEvent that represents ordered termination and produces a trigger");
 		signalEndEvent.addAdaption("messageEndEvent");
 		signalEndEvent.addAdaption("multipleEndEvent");
 		add(signalEndEvent);
@@ -842,7 +843,7 @@ class EventElements extends ElementsCollection {
 		messageStartEvent
 				.setLocatorExpression(buildStartEventXPathExpression("message"));
 		messageStartEvent
-				.setDocumentation("A messageStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion.");
+				.setDocumentation("A messageStartEvent can be adapted to another startEvent that represents ordered process instantiation and is triggered in some fashion.");
 		messageStartEvent.addAdaption("conditionalStartEvent");
 		messageStartEvent.addAdaption("signalStartEvent");
 		messageStartEvent.addAdaption("multipleStartEvent");
@@ -871,7 +872,7 @@ class EventElements extends ElementsCollection {
 		conditionalStartEvent
 				.setLocatorExpression(buildStartEventXPathExpression("conditional"));
 		conditionalStartEvent
-				.setDocumentation("A conditionalStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion");
+				.setDocumentation("A conditionalStartEvent can be adapted to another startEvent that represents normal control-flow and is fired through a trigger");
 		conditionalStartEvent.addAdaption("messageStartEvent");
 		conditionalStartEvent.addAdaption("signalStartEvent");
 		conditionalStartEvent.addAdaption("multipleStartEvent");
@@ -885,7 +886,7 @@ class EventElements extends ElementsCollection {
 		signalStartEvent
 				.setLocatorExpression(buildStartEventXPathExpression("signal"));
 		signalStartEvent
-				.setDocumentation("A signalStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion");
+				.setDocumentation("A signalStartEvent can be adapted to another startEvent that represents normal process instantiation and provides a trigger");
 		signalStartEvent.addAdaption("messageStartEvent");
 		signalStartEvent.addAdaption("conditionalStartEvent");
 		signalStartEvent.addAdaption("multipleStartEvent");
@@ -900,7 +901,9 @@ class EventElements extends ElementsCollection {
 				.setLocatorExpression("//*[local-name() = 'startEvent' and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleStartEvent
 				.setDocumentation("A multipleStartEvent can be reduced to one of the available alternative start events");
-		// start events gefolgt von exclusive gateway
+		multipleStartEvent.addAdaption("multipleStartEventsWithExclusiveGateway");
+		multipleStartEvent.addAdaption("multipleStartEventsWithInclusiveGateway");
+		multipleStartEvent.addAdaption("multipleStartEventsWithComplexGateway");
 
 		add(multipleStartEvent);
 	}
