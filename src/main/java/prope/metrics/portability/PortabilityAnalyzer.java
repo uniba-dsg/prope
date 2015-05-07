@@ -9,14 +9,24 @@ import prope.reporting.ReportEntry;
 
 public final class PortabilityAnalyzer implements FileAnalyzer {
 
+	private final String fileEnding = ".bpel";
+
 	@Override
 	public List<ReportEntry> analyzeFile(Path filePath) {
-
-		System.out.println("Analyzing " + filePath + " for portability");
-		ReportEntry entry = populateEntry(filePath);
-
 		List<ReportEntry> report = new ArrayList<ReportEntry>();
-		report.add(entry);
+
+		if (filePath.toString().endsWith(fileEnding)) {
+
+			System.out.println("Analyzing " + filePath + " for portability");
+
+			ReportEntry entry = populateEntry(filePath);
+			report.add(entry);
+
+		} else {
+
+			System.out.println("Ignoring " + filePath);
+
+		}
 		return report;
 	}
 
