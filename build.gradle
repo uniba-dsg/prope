@@ -45,7 +45,7 @@ tasks.withType(FindBugs) {
 }
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '2.2'
+	gradleVersion = '2.4'
 }
 
 task deleteTmpDir(type: Delete){
