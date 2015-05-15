@@ -22,5 +22,5 @@ layout(matrix(c(1,2,3,4),2,2))
 plot(fit)
 
 # scatterplot
-plot(ds$DDS, ds$NServ, xlab="Deployment Descriptor Size", ylab="Number of Services")
-abline(lm(ds$NServ~ds$DDS)) 
+plot(ds$DDS, ds$NServ, xlab="Deployment Descriptor Size", ylab="Number of Services",cex=1.5, cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
+abline(lm(ds$NServ~ds$DDS), lwd=2) 
