@@ -20,3 +20,7 @@ fit <- lm(ds$NServ ~ ds$DDS)
 summary(fit)
 layout(matrix(c(1,2,3,4),2,2))
 plot(fit)
+
+# scatterplot
+plot(ds$DDS, ds$NServ, xlab="Deployment Descriptor Size", ylab="Number of Services")
+abline(lm(ds$NServ~ds$DDS)) 
