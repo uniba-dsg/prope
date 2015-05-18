@@ -73,8 +73,7 @@ public class ElementSerializer {
 			println("Expression & " + element.getLocatorExpression()
 					+ TABLE_NEWLINE);
 			printColor();
-			println("Adaptions & " + element.getAdaptions() + TABLE_NEWLINE);
-			println("Score & " + element.getNumberOfAdaptions() + TABLE_NEWLINE);
+			println("Adaptions ("+element.getNumberOfAdaptions()+") & " + element.getAdaptions() + TABLE_NEWLINE);
 
 			// print a midrule expect for last assertion
 			if (i != elements.size() - 1) {
