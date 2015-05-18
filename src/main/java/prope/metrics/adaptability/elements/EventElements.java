@@ -181,8 +181,8 @@ class EventElements extends ElementsCollection {
 		escalationBoundaryEvent
 				.setLocatorExpression(buildNonInterruptingBoundaryEventXPathExpression("escalation"));
 		escalationBoundaryEvent
-				.setDocumentation("A nonInterruptingEscalationBoundaryEvent cannot be adapted since there is no other non-interrupting boundary event that leads to exceptional control-flow continuation"
-						+ " Errors events are only interrupting");
+				.setDocumentation("A nonInterruptingEscalationBoundaryEvent cannot be adapted since there is no other non-interrupting boundary event that leads to exceptional control-flow continuation."
+						+ " Error events are only interrupting");
 
 		add(escalationBoundaryEvent);
 	}
@@ -696,7 +696,7 @@ class EventElements extends ElementsCollection {
 		timerStartEvent
 				.setLocatorExpression(buildEventSubProcessInterruptingStartEventXPathExpression("timer"));
 		timerStartEvent
-				.setDocumentation("A interruptingTimerStartEvent can be adapted to another startEvent that leads to normal control-flow continuation and requires a trigger, as it is possible to calculate the expiration of the temporal condition and trigger the event when it occurs");
+				.setDocumentation("An interruptingTimerStartEvent can be adapted to another startEvent that leads to normal control-flow continuation and requires a trigger, as it is possible to calculate the expiration of the temporal condition and trigger the event when it occurs");
 
 		timerStartEvent.addAdaption("messageStartEvent");
 		timerStartEvent.addAdaption("signalStartEvent");
