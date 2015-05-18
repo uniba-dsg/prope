@@ -4,27 +4,13 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import prope.metrics.adaptability.elements.AdaptableElement;
-import prope.metrics.adaptability.elements.AdaptableElements;
 
-final class BinaryAdaptabilityMetric implements AdaptabilityMetric {
-
-	private Map<String, AdaptableElement> elements;
-
-	private final int referenceScore;
-
-	private AtomicInteger sum;
-
-	private AtomicInteger maxDegree;
+final class BinaryAdaptabilityMetric extends AdaptabilityMetric {
 
 	private final double cutoffValue;
 
 	public BinaryAdaptabilityMetric(double cutoffValue) {
 		this.cutoffValue = cutoffValue;
-		elements = new AdaptableElements().getElementsByName();
-		referenceScore = elements.values().parallelStream()
-				.filter(element -> !element.isForDetectionOnly())
-				.mapToInt(element -> element.getAdaptabilityScore()).max()
-				.getAsInt();
 	}
 
 	@Override

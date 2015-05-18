@@ -4,25 +4,8 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import prope.metrics.adaptability.elements.AdaptableElement;
-import prope.metrics.adaptability.elements.AdaptableElements;
 
-final class WeightedAdaptabilityMetric implements AdaptabilityMetric {
-
-	private Map<String, AdaptableElement> elements;
-
-	private int referenceScore;
-
-	private AtomicInteger sum;
-
-	private AtomicInteger maxDegree;
-
-	public WeightedAdaptabilityMetric() {
-		elements = new AdaptableElements().getElementsByName();
-		referenceScore = elements.values().parallelStream()
-				.filter(element -> !element.isForDetectionOnly())
-				.mapToInt(element -> element.getAdaptabilityScore()).max()
-				.getAsInt();
-	}
+final class WeightedAdaptabilityMetric extends AdaptabilityMetric {
 
 	@Override
 	public double computeAdaptability(Map<String, AtomicInteger> processElements) {
@@ -40,7 +23,7 @@ final class WeightedAdaptabilityMetric implements AdaptabilityMetric {
 
 	private void addElementAdaptability(
 			Map<String, AtomicInteger> processElements, String elementName) {
-		AdaptableElement element = elements.get(elementName);
+		AdaptableElement element = getElements().get(elementName);
 		if (element.isForDetectionOnly()) {
 			return;
 		}
@@ -48,7 +31,7 @@ final class WeightedAdaptabilityMetric implements AdaptabilityMetric {
 		int number = processElements.get(elementName).get();
 		int elementScore = element.getAdaptabilityScore();
 		sum.addAndGet(number * elementScore);
-		maxDegree.addAndGet(number * referenceScore);
+		maxDegree.addAndGet(number * getReferenceScore());
 	}
 
 	@Override
