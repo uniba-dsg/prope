@@ -329,6 +329,7 @@ class ActivityElements extends ElementsCollection {
 		loopTask.addAdaption("complexGatewaysAndSequenceFlows");
 		loopTask.addAdaption("loopSubProcess");
 		loopTask.addAdaption("adHocSubProcess");
+		loopTask.addAdaption("eventSubProcess");
 
 		add(loopTask);
 	}
