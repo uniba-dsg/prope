@@ -47,6 +47,7 @@ public class ElementSerializer {
 		println("\\begin{scriptsize}");
 		println("\\begin{longtable}{p{0.13\\textwidth}|p{0.82\\textwidth}}");
 		println("\\caption{Adaptability Scores}\\\\");
+		println("\\lanel{tab:adaptableElements}\\\\");
 		println("\\textbf{Property} & \\textbf{Element}");
 		println("\\vspace{2pt}\\\\");
 		println("\\toprule");
