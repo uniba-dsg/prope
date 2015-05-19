@@ -2,6 +2,7 @@ package prope.metrics.adaptability.elements;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Collections;
 import java.util.List;
 
 public class ElementSerializer {
@@ -63,6 +64,8 @@ public class ElementSerializer {
 
 	private void writeLongTableBody() {
 		List<AdaptableElement> elements = new AdaptableElements().getElements();
+		Collections.sort(elements);
+		
 		for (int i = 0; i < elements.size(); i++) {
 			AdaptableElement element = elements.get(i);
 
