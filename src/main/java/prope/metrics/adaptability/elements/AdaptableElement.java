@@ -9,7 +9,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-public final class AdaptableElement {
+public final class AdaptableElement implements Comparable<AdaptableElement>{
 
 	private final String name;
 
@@ -129,6 +129,15 @@ public final class AdaptableElement {
 			hashCode = result;
 		}
 		return result;
+	}
+
+	@Override
+	public int compareTo(AdaptableElement o) {
+		if(o == null || o.getName() == null){
+			throw new IllegalArgumentException("Comparing element must not be null");
+		}
+		
+		return this.name.compareToIgnoreCase(o.getName());
 	}
 
 }
