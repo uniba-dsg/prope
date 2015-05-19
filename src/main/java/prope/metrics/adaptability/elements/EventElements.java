@@ -119,7 +119,7 @@ class EventElements extends ElementsCollection {
 		nonInterruptingMessageBoundaryEvent
 				.setLocatorExpression(buildNonInterruptingBoundaryEventXPathExpression("message"));
 		nonInterruptingMessageBoundaryEvent
-				.setDocumentation("An nonInterruptingMessageBoundaryEvent can be adapted to another non-interrupting boundary event that transmits a signal and represents normal control-flow continuation");
+				.setDocumentation("A nonInterruptingMessageBoundaryEvent can be adapted to another non-interrupting boundary event that transmits a signal and represents normal control-flow continuation");
 		nonInterruptingMessageBoundaryEvent
 				.addAdaption("nonInterruptingSignalBoundaryEvent");
 		nonInterruptingMessageBoundaryEvent
@@ -327,7 +327,7 @@ class EventElements extends ElementsCollection {
 		multipleBoundaryEvent
 				.setLocatorExpression("//*[local-name() = 'boundaryEvent' and (@isInterrupting = 'true') and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleBoundaryEvent
-				.setDocumentation("A interruptingMultipleBoundaryEvent can be adapted by multiple interrupting boundary events that link to a merging gateway");
+				.setDocumentation("An interruptingMultipleBoundaryEvent can be adapted by multiple interrupting boundary events that link to a merging gateway");
 
 		multipleBoundaryEvent
 				.addAdaption("multipleInterruptingBoundaryEventsFollowedByExclusiveGateway");
@@ -424,7 +424,7 @@ class EventElements extends ElementsCollection {
 		escalationThrowEvent
 				.setLocatorExpression(buildIntermediateThrowEventXPathExpression("escalation"));
 		escalationThrowEvent
-				.setDocumentation("A intermediateEscalationThrowEvent can be adapted to another intermediate throw event that leads to exceptional control-flow continuation and is fired by a trigger");
+				.setDocumentation("An intermediateEscalationThrowEvent can be adapted to another intermediate throw event that leads to exceptional control-flow continuation and is fired by a trigger");
 		escalationThrowEvent.addAdaption("intermediateMessageThrowEvent");
 		escalationThrowEvent.addAdaption("intermediateSignalThrowEvent");
 		escalationThrowEvent.addAdaption("intermediateMultipleThrowEvent");
@@ -525,7 +525,7 @@ class EventElements extends ElementsCollection {
 		multipleParallelCatchEvent
 				.setLocatorExpression("//*[local-name() = 'intermediateCatchEvent' and (@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]");
 		multipleParallelCatchEvent
-				.setDocumentation("An intermediateMultipleParallelCatchEvent can be reduced to the available alternative catch events surrounded by an gateway that triggers multiple parallel branches");
+				.setDocumentation("An intermediateMultipleParallelCatchEvent can be reduced to the available alternative catch events surrounded by a gateway that triggers multiple parallel branches");
 		multipleParallelCatchEvent
 				.addAdaption("intermediateCatchEventsAndParallelGateway");
 		multipleParallelCatchEvent
@@ -602,7 +602,7 @@ class EventElements extends ElementsCollection {
 		conditionalStartEvent
 				.setLocatorExpression(buildEventSubProcessNonInterruptingStartEventXPathExpression("conditional"));
 		conditionalStartEvent
-				.setDocumentation("A nonInterruptingConditionalStartEvent can be adapted to another non-interrupting start event that uses represents normal control-flow continuation");
+				.setDocumentation("A nonInterruptingConditionalStartEvent can be adapted to another non-interrupting start event that represents normal control-flow continuation");
 
 		conditionalStartEvent.addAdaption("signalStartEvent");
 		conditionalStartEvent.addAdaption("messageStartEvent");
@@ -655,7 +655,7 @@ class EventElements extends ElementsCollection {
 		escalationStartEvent
 				.setLocatorExpression(buildEventSubProcessNonInterruptingStartEventXPathExpression("escalation"));
 		escalationStartEvent
-				.setDocumentation("A nonInterruptingEscalationStartEvent cannot be adapted since other non-interrupting start event that represents exceptional control-flow continuation");
+				.setDocumentation("A nonInterruptingEscalationStartEvent cannot be adapted since there is no other non-interrupting start event that represents exceptional control-flow continuation");
 		add(escalationStartEvent);
 	}
 

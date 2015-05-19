@@ -105,7 +105,7 @@ class GatewayElements extends ElementsCollection {
 		exclusiveGateway
 				.setLocatorExpression("//*[local-name() = 'exclusiveGateway']");
 		exclusiveGateway
-				.setDocumentation("an exclusiveGateway can be adapted to any other gateway that allows for the triggering of "
+				.setDocumentation("An exclusiveGateway can be adapted to any other gateway that allows for the triggering of "
 						+ "one among a set of branches");
 		exclusiveGateway.addAdaption("eventBasedGateway");
 		exclusiveGateway.addAdaption("complexGateway");

@@ -42,7 +42,7 @@ class ActivityElements extends ElementsCollection {
 		subProcess
 				.setLocatorExpression("//*[local-name() = 'subProcess' and not (@triggeredByEvent = 'true' or child::*[local-name() = 'multiInstanceLoopCharacteristics'] or child::*[local-name() = 'standardLoopCharacteristics'])]");
 		subProcess
-				.setDocumentation("An ordinary subProcess can be embedded into the process or replaced by a more specific type of subprocess");
+				.setDocumentation("An ordinary subProcess can be embedded into the process or replaced by a more specific type of subProcess");
 		subProcess.addAdaption("embeddIntoProcess");
 		subProcess.addAdaption("transactionSubProcess");
 		subProcess.addAdaption("eventSubProcess");
@@ -96,7 +96,7 @@ class ActivityElements extends ElementsCollection {
 				.setLocatorExpression("//*[(local-name() = 'subProcess') "
 						+ "and (child::*[local-name() = 'multiInstanceLoopCharacteristics' and @isSequential='true'])]");
 		sequentialMultiInstanceSubProcess
-				.setDocumentation("sequentialMultiInstanceSubProcesses can be embedded into the parent processes and be surrounded by ordinary looping mechanisms or adapted to different types of subprocesses");
+				.setDocumentation("SequentialMultiInstanceSubProcesses can be embedded into the parent processes and be surrounded by ordinary looping mechanisms or adapted to different types of subprocesses");
 		sequentialMultiInstanceSubProcess
 				.addAdaption("embeddedfragmentWithExclusiveGateways");
 		sequentialMultiInstanceSubProcess
@@ -190,7 +190,7 @@ class ActivityElements extends ElementsCollection {
 
 		globalManualTask
 				.setDocumentation("A globalManualTask can be embedded into a process as an ordinary manual task. "
-						+ "Apart from this, there is alternative way to represent an arbitrary external action in general");
+						+ "Apart from this, there is no alternative way to represent an arbitrary external action in general");
 		globalManualTask.addAdaption("manualTask");
 		add(globalManualTask);
 	}
