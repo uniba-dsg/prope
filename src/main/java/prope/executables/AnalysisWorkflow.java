@@ -48,7 +48,7 @@ public final class AnalysisWorkflow {
 		dirAnalyzer = new DirectoryAnalyzer(fileAnalyzer);
 	}
 
-	public void start() {
+	public Report start() {
 		startWatch();
 
 		if (!Files.isDirectory(root)) {
@@ -62,6 +62,8 @@ public final class AnalysisWorkflow {
 		writeResults();
 
 		purgeTempDir();
+		
+		return report;
 	}
 
 	private void stopWatch() {
