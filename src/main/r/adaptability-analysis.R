@@ -26,11 +26,13 @@ summary(sane$isExecutable)
 # plot element occurences
 constructs = read.csv(rawDataFile, sep=";")
 constructsSorted = constructs[order(constructs$number),]
-constructsRemoved = constructsSorted[(constructsSorted$number > 150),]
+list(constructsSorted)
+constructsRemoved = constructsSorted[(constructsSorted$number > 244),]
+list(constructsRemoved)
 constructsRemoved$number <- (constructsRemoved$number / nrow(ds)) * 100
 list(constructsRemoved)
 par(mar=c(6, 12, 4, 2) + 0.1, family="serif")
-barplot(constructsRemoved$number, horiz=TRUE,names.arg=constructsRemoved$element, las=1,cex.names=1.5, cex.lab=2, xlab="Percentage of Processes", ylab="", xlim=c(0,100))
+barplot(constructsRemoved$number, horiz=TRUE,names.arg=constructsRemoved$element, las=1,cex.names=1.5, cex.lab=1.5, xlab="Percentage of Processes", ylab="", xlim=c(0,100))
 
 #plot with less constructs
 constructsRemoved = constructsSorted[(constructsSorted$number > 300),]
