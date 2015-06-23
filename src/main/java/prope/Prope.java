@@ -3,6 +3,7 @@ package prope;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import prope.executables.AnalysisException;
 import prope.executables.AnalysisType;
 import prope.executables.AnalysisWorkflow;
 
@@ -19,23 +20,23 @@ public class Prope {
 		workflow.start();
 	}
 
-	private static void validateArgs(String[] args) {
+	static void validateArgs(String[] args) {
 		if (args.length != 2) {
 			System.out.println("Error: Wrong arguments!");
 			System.out.println("Arguments must be:");
 			System.out
 					.println("[1]: Selection of analysis type. Use -p for analysing direct portability, -d for deployment analysis, -i for installability analysis, -a for adaptability analysis");
 			System.out.println("[2]: Path to file or directory");
-			System.exit(1);
+			throw new AnalysisException("Wrong arguments");
 		} else if (!args[0].equals("-i") && !args[0].equals("-d")
 				&& !args[0].equals("-p") && !args[0].equals("-a")) {
 			System.out.println("Unknown option: " + args[0]);
 			System.out.println("Available options: -i | -d | -p | -a");
-			System.exit(1);
+			throw new AnalysisException("Wrong arguments");
 		}
 	}
 
-	private static AnalysisType getAnalysisType(String option) {
+	static AnalysisType getAnalysisType(String option) {
 		if ("-i".equals(option)) {
 			return AnalysisType.INSTALLABILITY;
 		} else if ("-d".equals(option)) {
