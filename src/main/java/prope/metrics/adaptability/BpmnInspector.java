@@ -1,6 +1,7 @@
 package prope.metrics.adaptability;
 
 import java.nio.file.InvalidPathException;
+import java.nio.file.Paths;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -9,21 +10,20 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import prope.executables.AnalysisException;
-import de.uniba.wiai.lspi.ws1213.ba.application.BPMNReferenceValidator;
-import de.uniba.wiai.lspi.ws1213.ba.application.BPMNReferenceValidatorImpl;
-import de.uniba.wiai.lspi.ws1213.ba.application.ValidationResult;
-import de.uniba.wiai.lspi.ws1213.ba.application.ValidatorException;
+import api.ValidationException;
+import api.ValidationResult;
+import de.uniba.dsg.bpmnspector.BPMNspector;
 
 public final class BpmnInspector {
 
 	private static final String BPMN_NAMESPACE = "http://www.omg.org/spec/BPMN/20100524/MODEL";
 
-	private BPMNReferenceValidator referenceValidator;
+	private BPMNspector referenceValidator;
 
 	public BpmnInspector() {
 		try {
-			referenceValidator = new BPMNReferenceValidatorImpl();
-		} catch (ValidatorException e) {
+			referenceValidator = new BPMNspector();
+		} catch (ValidationException e) {
 			throw new AnalysisException(e);
 		}
 	}
@@ -59,10 +59,9 @@ public final class BpmnInspector {
 	String hasReferenceIssues(String path) {
 		ValidationResult result;
 		try {
-			result = referenceValidator.validateSingleFile(path);
-		} catch (ValidatorException | InvalidPathException
+			result = referenceValidator.validate(Paths.get(path));
+		} catch (ValidationException | InvalidPathException
 				| NullPointerException e) {
-			System.err.println(e.getMessage());
 			return "false";
 		}
 
