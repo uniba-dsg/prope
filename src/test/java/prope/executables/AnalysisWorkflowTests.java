@@ -26,6 +26,11 @@ public class AnalysisWorkflowTests {
 				AnalysisType.DEPLOYABILITY);
 	}
 	
+	@Test(expected = AnalysisException.class)
+	public void unknownAnalysisType(){
+		sut = new AnalysisWorkflow(Paths.get(deployabilityResourcesPath), AnalysisType.UNKNOWN);
+	}
+	
 	@Test
 	public void deployabilityAnalysis(){
 		sut = new AnalysisWorkflow(Paths.get(deployabilityResourcesPath + "xmlDescriptorWithText.zip"),
