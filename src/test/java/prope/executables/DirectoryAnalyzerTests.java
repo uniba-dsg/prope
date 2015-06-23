@@ -7,7 +7,6 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import prope.metrics.installability.deployability.DeploymentPackageAnalyzer;
@@ -67,7 +66,6 @@ public class DirectoryAnalyzerTests {
 	}
 
 	@Test
-	@Ignore
 	public void testEmptyDir() {
 		sut = new DirectoryAnalyzer(new AverageInstallationTimeCalculator());
 		Report report = sut.analyzeDirectory(Paths.get(userDir
