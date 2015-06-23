@@ -3,7 +3,10 @@ package prope.executables;
 import static org.junit.Assert.assertEquals;
 
 import java.nio.file.Paths;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Test;
 
@@ -14,6 +17,8 @@ public class AnalysisWorkflowTests {
 	private AnalysisWorkflow sut;
 	
 	private final String deployabilityResourcesPath = "src/test/resources/installability/deployment/";
+	
+	private final String installabilityResourcePath = "src/test/resources/installability/server/";
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonExistingDirectory() {
@@ -57,5 +62,20 @@ public class AnalysisWorkflowTests {
 		} else {
 			return 0;
 		}
+	}
+	
+	@Test
+	public void installabilityAnalysis() throws ParseException {
+		sut = new AnalysisWorkflow(Paths.get(installabilityResourcePath + "simple/"),
+				AnalysisType.INSTALLABILITY);
+		
+		List<ReportEntry> results = sut.start().getEntries();
+		assertEquals(results.size(),1);
+
+		String ait = results.get(0).getVariableValue("AIT");
+		NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+		Number number = format.parse(ait);
+		double d = number.doubleValue();
+		assertEquals("AIT should be 22,00, but was " + d, 22, d, 0.1);
 	}
 }
