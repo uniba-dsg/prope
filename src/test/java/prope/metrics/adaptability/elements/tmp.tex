@@ -1,0 +1,690 @@
+\begin{center}
+\begin{tiny}
+\begin{longtable}{p{0.13\textwidth}|p{0.81\textwidth}}
+\caption{Adaptability Scores}\\
+\label{tab:adaptableElements}\\
+\textbf{Property} & \textbf{Element}
+\vspace{2pt}\\
+\toprule
+\endfirsthead
+\multicolumn{2}{c}
+{\tablename\ \thetable\ -- \emph{Continued from previous page}}\\
+\endhead
+\multicolumn{2}{r}{\emph{Continued on next page}}
+\endfoot
+\bottomrule
+\endlastfoot
+Element name & adHocSubProcess\\
+\myrowcolour
+Documentation &Due to its unstructured nature, no general advice can be given on how to adapt an adHocSubProcess\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'adHocSubProcess']\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & businessRuleTask\\
+\myrowcolour
+Documentation &A businessRuleTask can be adapted by another task that can be used to trigger (programmatically or manually) the execution of a business rule through another program and return the result\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'businessRuleTask']\\
+\myrowcolour
+Adaptions (7) & [serviceTask, userTask, scriptTask, sendAndReceiveTask, globalScriptTask, globalUserTask, globalBusinessRuleTask]\\
+\midrule
+Element name & callActivity\\
+\myrowcolour
+Documentation &A callActivity can be adapted by replacing it with a replica of the called globalActivity or process embedded into the calling process\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'callActivity']\\
+\myrowcolour
+Adaptions (1) & [embedIntoProcess]\\
+\midrule
+Element name & cancelEndEvent\\
+\myrowcolour
+Documentation &Since there is no alternative endEvent with transactional sematics, this event cannot be adapted\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'endEvent' and (child::*[local-name() = 'cancelEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'cancelEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & compensationEndEvent\\
+\myrowcolour
+Documentation &Since there is no alternative endEvent with compensation sematics, this event cannot be adapted\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'endEvent' and (child::*[local-name() = 'compensationEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'compensationEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & compensationStartEvent\\
+\myrowcolour
+Documentation &A compensationStartEvent cannot be adapted since there is no alternative start event with compensational semantics\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and @isInterrupting = 'true' and (child::*[local-name() = 'compensationEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'compensationEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & complexGateway\\
+\myrowcolour
+Documentation &The general behavior of the complexGateway cannot be emulated by any other construct\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'complexGateway']\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & conditionalStartEvent\\
+\myrowcolour
+Documentation &A conditionalStartEvent can be adapted to another startEvent that represents normal control-flow and is fired through a trigger\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'startEvent' and (child::*[local-name() = 'conditionalEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'conditionalEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [messageStartEvent, signalStartEvent, multipleStartEvent, parallelMultipleStartEvent]\\
+\midrule
+Element name & errorEndEvent\\
+\myrowcolour
+Documentation &There is no equivalent for this end event, since it terminates all active threads and signals a fault\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'endEvent' and (child::*[local-name() = 'errorEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'errorEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & escalationEndEvent\\
+\myrowcolour
+Documentation &There is no equivalent for this end event, since it does not terminate all active threads and, at the same time, signals a problem\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'endEvent' and (child::*[local-name() = 'escalationEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'escalationEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & eventBasedGateway\\
+\myrowcolour
+Documentation &An eventBasedGateway can be adapted to a solution where an intermediate multipleCatchEvent waits for the occurence of one among a set of events and a different control-flow path is taken by a following gateway, depending on the type of event\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'eventBasedGateway' and not (@eventGatewayType = 'parallel') and not (@instantiate = 'true')]\\
+\myrowcolour
+Adaptions (3) & [intermediateMultipleCatchEventFollowedByExclusiveGateway, intermediateMultipleCatchEventFollowedByInclusiveGateway, intermediateMultipleCatchEventFollowedByComplexGateway]\\
+\midrule
+Element name & eventSubProcess\\
+\myrowcolour
+Documentation &EventSubProcesses can be adapted to a different form of subProcess that is executed through a callActivity. In case of an interrupting startEvent, the subProcess can be embedded into the normal flow of control (thus halting the parent process). In case of a noninterrupting startEvent the subProcess must be called in parallel to the normal flow using a parallelGateway.\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']\\
+\myrowcolour
+Adaptions (3) & [callActivityAndTransactionSubProcess, callActiviyAndAdHocSubProcess, callActivityAndOrdinarySubProcess]\\
+\midrule
+Element name & exclusiveGateway\\
+\myrowcolour
+Documentation &An exclusiveGateway can be adapted to any other gateway that allows for the triggering of one among a set of branches\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'exclusiveGateway']\\
+\myrowcolour
+Adaptions (3) & [eventBasedGateway, complexGateway, inclusiveGateway]\\
+\midrule
+Element name & globalBusinessRuleTask\\
+\myrowcolour
+Documentation &A globalBusinessRuleTask can be adapted through another task that triggers (programmatically or manually) the execution of a business rule through another program and returns the result\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'globalBusinessRuleTask']\\
+\myrowcolour
+Adaptions (7) & [serviceTask, userTask, scriptTask, businessRuleTask, sendAndReceiveTask, globalScriptTask, globalUserTask]\\
+\midrule
+Element name & globalManualTask\\
+\myrowcolour
+Documentation &A globalManualTask can be embedded into a process as an ordinary manual task. Apart from this, there is no alternative way to represent an arbitrary external action in general\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'globalManualTask']\\
+\myrowcolour
+Adaptions (1) & [manualTask]\\
+\midrule
+Element name & globalScriptTask\\
+\myrowcolour
+Documentation &A globalScriptTask can be the adaptions can be embedded into the process as an ordinary scriptTask or be adapted to another task that triggers the execution of a script at another entity (programmatically or manually). A receiveTask is not suitable as it passively waits without performing an action and a businessRuleTask is too specific\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'globalScriptTask']\\
+\myrowcolour
+Adaptions (5) & [serviceTask, sendTask, userTask, scriptTask, globalUserTask]\\
+\midrule
+Element name & globalUserTask\\
+\myrowcolour
+Documentation &A globalUserTask can be embedded into the process as an ordinary userTask or be adapted through another task that is programmed to ask for user input\\
+Expression & //*[local-name() = 'definitions']/*[local-name() = 'globalUserTask']\\
+\myrowcolour
+Adaptions (5) & [scriptTask, serviceTask, sendTask, globalScriptTask, userTask]\\
+\midrule
+Element name & inclusiveGateway\\
+\myrowcolour
+Documentation &An inclusiveGateway can only be adapted to a complexGateway which is strictly more expressive\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'inclusiveGateway']\\
+\myrowcolour
+Adaptions (1) & [complexGateway]\\
+\midrule
+Element name & instantiatingEventBasedGateway\\
+\myrowcolour
+Documentation &An instantiatingEventBasedGateway can be adapted to a solution where the multiple startEvents are merged by an exclusiveGateway\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'eventBasedGateway' and not (@eventGatewayType = 'parallel') and (@instantiate = 'true')]\\
+\myrowcolour
+Adaptions (1) & [startEventsFollowedByExclusiveGateway]\\
+\midrule
+Element name & instantiatingParallelEventBasedGateway\\
+\myrowcolour
+Documentation &An instantiatingParallelEventBasedGateway cannot be adapted since there is no alternative way to avoid the instantiation of the process until multiple events have been received\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'eventBasedGateway' and (@eventGatewayType = 'parallel') and (@instantiate = 'true')]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & intermediateCompensationThrowEvent\\
+\myrowcolour
+Documentation &An intermediateCompensationThrowEvent cannot be adapted since there is no other intermediate throw event with compensation semantics\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'intermediateThrowEvent' and (child::*[local-name() = 'compensationEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'compensationEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & intermediateConditionalCatchEvent\\
+\myrowcolour
+Documentation &An intermediateConditionalCatchEvent can be adapted to another intermediate catch event that triggers normal control-flow continuation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'intermediateCatchEvent' and (child::*[local-name() = 'conditionalEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'conditionalEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [intermediateSignalCatchEvent, intermediateMessageCatchEvent, intermediateMultipleCatchEvent, intermediateMultipleParallelCatchEvent]\\
+\midrule
+Element name & intermediateEscalationThrowEvent\\
+\myrowcolour
+Documentation &An intermediateEscalationThrowEvent can be adapted to another intermediate throw event that leads to exceptional control-flow continuation and is fired by a trigger\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'intermediateThrowEvent' and (child::*[local-name() = 'escalationEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'escalationEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [intermediateMessageThrowEvent, intermediateSignalThrowEvent, intermediateMultipleThrowEvent, intermediateMultipleParallelThrowEvent]\\
+\midrule
+Element name & intermediateMessageCatchEvent\\
+\myrowcolour
+Documentation &An intermediateMessageCatchEvent can be adapted to another intermediateCatchEvent used in normal control-flow that consumes a trigger\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'intermediateCatchEvent' and (child::*[local-name() = 'messageEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'messageEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [intermediateSignalCatchEvent, receiveTask, intermediateMultipleCatchEvent, intermediateParallelMultipleCatchEvent]\\
+\midrule
+Element name & intermediateMessageThrowEvent\\
+\myrowcolour
+Documentation &This event can be adapted to a sendTask or another intermediateThrowEvent used in normal control-flow that provides a signal\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'intermediateThrowEvent' and (child::*[local-name() = 'messageEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'messageEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [intermediateSignalThrowEvent, sendTask, intermediateMultipleThrowEvent, intermediateParallelMultipleThrowEvent]\\
+\midrule
+Element name & intermediateMultipleCatchEvent\\
+\myrowcolour
+Documentation &An intermediateMultipleCatchEvent can be reduced to the available alternative catch events surrounded by gateways that allow for the selection of one among a set of branches\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'intermediateCatchEvent' and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]\\
+\myrowcolour
+Adaptions (3) & [intermediateCatchEventsAndExclusiveGateway, intermediateCatchEventsAndInclusiveGateway, intermediateCatchEventsAndComplexGateway]\\
+\midrule
+Element name & intermediateMultipleParallelCatchEvent\\
+\myrowcolour
+Documentation &An intermediateMultipleParallelCatchEvent can be reduced to the available alternative catch events surrounded by a gateway that triggers multiple parallel branches\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'intermediateCatchEvent' and (@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]\\
+\myrowcolour
+Adaptions (3) & [intermediateCatchEventsAndParallelGateway, intermediateCatchEventsAndInclusiveGateway, intermediateCatchEventsAndComplexGateway]\\
+\midrule
+Element name & intermediateMultipleThrowEvent\\
+\myrowcolour
+Documentation &An intermediateMultipleThrowEvent can be reduced to the available alternative throw events surrounded by a gateways that allow for the selection of one branch\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'intermediateThrowEvent' and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]\\
+\myrowcolour
+Adaptions (3) & [intermediateThrowEventsAndExclusiveGateway, intermediateThrowEventsAndInclusiveGateway, intermediateThrowEventsAndComplexGateway]\\
+\midrule
+Element name & intermediateNoneThrowEvent\\
+\myrowcolour
+Documentation &An intermediateNoneThrowEvent can be adapted to another intermediateThrowEvent that leads to normal control-flow continuation. Lacking a specific signal that can be caught, the event can also be ignored\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'intermediateThrowEvent' and not(child::*[contains(local-name(),'ventDefinition')])]\\
+\myrowcolour
+Adaptions (5) & [deleteEvent, intermediateMessageThrowEvent, intermediateSignalThrowEvent, intermediateMultipleThrowEvent, intermediateParallelMultipleThrowEvent]\\
+\midrule
+Element name & intermediateSignalCatchEvent\\
+\myrowcolour
+Documentation &A intermediateSignalCatchEvent can be adapted to another intermediateCatchEvent that is used in normal control-flow and catches a trigger\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'intermediateThrowEvent' and (child::*[local-name() = 'catchEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'catchEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [intermediateMessageCatchEvent, intermediateConditionalCatchEvent, intermediateMultipleCatchEvent, intermediateParallelMultipleCatchEvent]\\
+\midrule
+Element name & intermediateSignalThrowEvent\\
+\myrowcolour
+Documentation &A intermediateSignalThrowEvent can be adapted to another intermediate throw event that leads to normal control-flow continuation and fires a trigger\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'intermediateThrowEvent' and (child::*[local-name() = 'signalEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'signalEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [intermediateMessageThrowEvent, intermediateConditionalThrowEvent, intermediateMultipleThrowEvent, intermediateParallelMultipleThrowEvent]\\
+\midrule
+Element name & intermediateTimerCatchEvent\\
+\myrowcolour
+Documentation &An intermediateTimerCatchEvent can be adapted to another intermediate catchEvent that has a trigger and leads to normal control-flow continuation, as it is possible to calculate the expiration of the time and trigger the event when it occurs\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'intermediateCatchEvent' and (child::*[local-name() = 'timerEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'timerEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (5) & [intermediateConditionalCatchEvent, intermediateMessageCatchEvent, intermediateSignalCatchEvent, intermediateMultipleCatchEvent, intermediateParallelMultipleCatchEvent]\\
+\midrule
+Element name & interruptingCancelBoundaryEvent\\
+\myrowcolour
+Documentation &An interruptingCancelBoundaryEvent cannot be adapted since its semantics with respect to transaction cancelation are unique\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and @isInterrupting = 'true' and (child::*[local-name() = 'cancelEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'cancelEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & interruptingCompensationBoundaryEvent\\
+\myrowcolour
+Documentation &An interruptingCompensationBoundaryEvent cannot be adapted since its semantics with respect to compensation are unique\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and @isInterrupting = 'true' and (child::*[local-name() = 'cancelEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'cancelEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & interruptingConditionalBoundaryEvent\\
+\myrowcolour
+Documentation &An interruptingConditionalBoundaryEvent can be adapted to another interrupting boundary event that represents normal control-flow continuation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and @isInterrupting = 'true' and (child::*[local-name() = 'conditionalEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'conditionalEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [interruptingSignalBoundaryEvent, interruptingMessageBoundaryEvent, interruptingMultipleBoundaryEvent, interruptingMultipleParallelBoundaryEvent]\\
+\midrule
+Element name & interruptingConditionalStartEvent\\
+\myrowcolour
+Documentation &An interruptingConditionalStartEvent can be adapted to another interrupting start event that represents normal control-flow\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and @isInterrupting = 'true' and (child::*[local-name() = 'conditionalEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'conditionalEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [signalStartEvent, messageStartEvent, multipleStartEvent, multipleParallelStartEvent]\\
+\midrule
+Element name & interruptingErrorBoundaryEvent\\
+\myrowcolour
+Documentation &An interruptingErrorBoundaryEvent can be adapted to another interrupting boundary event that leads to exceptional control-flow continuation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and @isInterrupting = 'true' and (child::*[local-name() = 'errorEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'errorEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (3) & [interruptingEscalationBoundaryEvent, interruptingMultipleBoundaryEvent, interruptingMultipleParallelBoundaryEvent]\\
+\midrule
+Element name & interruptingErrorStartEvent\\
+\myrowcolour
+Documentation &An interruptingErrorStartEvent can be adapted to another interrupting start event that leads to exceptional control-flow continuation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and @isInterrupting = 'true' and (child::*[local-name() = 'errorEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'errorEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (3) & [escalationStartEvent, multipleStartEvent, multipleParallelStartEvent]\\
+\midrule
+Element name & interruptingEscalationBoundaryEvent\\
+\myrowcolour
+Documentation &An interruptingEscalationBoundaryEvent can be adapted to another interrupting boundary event that leads to exceptional control-flow continuation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and @isInterrupting = 'true' and (child::*[local-name() = 'escalationEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'escalationEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (3) & [interruptingErrorBoundaryEvent, interruptingMultipleBoundaryEvent, interruptingMultipleParallelBoundaryEvent]\\
+\midrule
+Element name & interruptingEscalationStartEvent\\
+\myrowcolour
+Documentation &An interruptingEscalationStartEvent can be adapted to another interrupting start event that leads to exceptional control-flow continuation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and @isInterrupting = 'true' and (child::*[local-name() = 'escalationEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'escalationEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (3) & [errorStartEvent, multipleStartEvent, multipleParallelStartEvent]\\
+\midrule
+Element name & interruptingMessageBoundaryEvent\\
+\myrowcolour
+Documentation &An interruptingMessageBoundaryEvent can be adapted to another interrupting boundary event that fires a signal and leads to normal control-flow continuation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and @isInterrupting = 'true' and (child::*[local-name() = 'messageEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'messageEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [interruptingSignalBoundaryEvent, interruptingConditionalBoundaryEvent, interruptingMultipleBoundaryEvent, interruptingMultipleParallelBoundaryEvent]\\
+\midrule
+Element name & interruptingMessageStartEvent\\
+\myrowcolour
+Documentation &An interruptingMessageStart event can be adapted to another interrupting start event that leads to normal control-flow continuation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and @isInterrupting = 'true' and (child::*[local-name() = 'messageEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'messageEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [signalStartEvent, conditionalStartEvent, multipleStartEvent, multipleParallelStartEvent]\\
+\midrule
+Element name & interruptingMultipleBoundaryEvent\\
+\myrowcolour
+Documentation &An interruptingMultipleBoundaryEvent can be adapted by multiple interrupting boundary events that link to a merging gateway\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and (@isInterrupting = 'true') and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]\\
+\myrowcolour
+Adaptions (3) & [multipleInterruptingBoundaryEventsFollowedByExclusiveGateway, multipleInterruptingBoundaryEventsFollowedByInclusiveGateway, multipleInterruptingBoundaryEventsFollowedByComplexGateway]\\
+\midrule
+Element name & interruptingMultipleStartEvent\\
+\myrowcolour
+Documentation &An interruptingMultipleStartEvent can be adapted to multiple different eventSubProcesses with one start event each\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and (@isInterrupting = 'true') and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]\\
+\myrowcolour
+Adaptions (1) & [multipleEventSubProcessesWithSingleStartEvents]\\
+\midrule
+Element name & interruptingParallelMultipleBoundaryEvent\\
+\myrowcolour
+Documentation &A multipleParallelBoundaryEvent cannot be adapted since there is no other way to ensure that multiple events are thrown in parallel in the context of a single activity\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and (@isInterrupting = 'true') and (@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & interruptingParallelMultipleStartEvent\\
+\myrowcolour
+Documentation &A multipleParallelStartEvent cannot be adapted since there is no other way to avoid the instantiation of a process unless multiple conditions are satisfied\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and (@isInterrupting = 'true') and (@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & interruptingSignalBoundaryEvent\\
+\myrowcolour
+Documentation &An interrupting signal boundary event can be adapted to another interrupting boundary event that represents normal control-flow continuation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and @isInterrupting = 'true' and (child::*[local-name() = 'signalEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'signalEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [interruptingMessageBoundaryEvent, interruptingConditionalBoundaryEvent, interruptingMultipleBoundaryEvent, interruptingMultipleParallelBoundaryEvent]\\
+\midrule
+Element name & interruptingSignalStartEvent\\
+\myrowcolour
+Documentation &An interruptingSignalStartEvent can be adapted to another interrupting start event that represents normal process instantiation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and @isInterrupting = 'true' and (child::*[local-name() = 'signalEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'signalEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [messageStartEvent, conditionalStartEvent, multipleStartEvent, multipleParallelStartEvent]\\
+\midrule
+Element name & interruptingTimerBoundaryEvent\\
+\myrowcolour
+Documentation &An interruptingTimerBoundaryEvent can be adapted to another interruptingBoundaryEvent that leads to normal control-flow continuation and fires a trigger, as it is possible to calculate the expiration of the temporal condition and trigger the event when it occurs\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and @isInterrupting = 'true' and (child::*[local-name() = 'timerEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'timerEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (6) & [interruptingSignalBoundaryEvent, interruptingConditionalBoundaryEvent, interruptingMessageBoundaryEvent, interruptingSignalBoundaryEvent, interruptingMultipleBoundaryEvent, interruptingParallelMultipleBoundaryEvent]\\
+\midrule
+Element name & interruptingTimerStartEvent\\
+\myrowcolour
+Documentation &An interruptingTimerStartEvent can be adapted to another startEvent that leads to normal control-flow continuation and requires a trigger, as it is possible to calculate the expiration of the temporal condition and trigger the event when it occurs\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and @isInterrupting = 'true' and (child::*[local-name() = 'timerEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'timerEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (5) & [messageStartEvent, signalStartEvent, conditionalStartEvent, multipleStartEvent, multipleParallelStartEvent]\\
+\midrule
+Element name & linkCatchEvent\\
+\myrowcolour
+Documentation &Link events are only relevant to visualization and therefore not relevant for adaptation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'intermediateCatchEventEvent' and (child::*[local-name() = 'linkEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'linkEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & linkThrowEvent\\
+\myrowcolour
+Documentation &Link events are only relevant to visualization and therefore not relevant for adaptation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'intermediateThrowEventEvent' and (child::*[local-name() = 'linkEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'linkEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & loopSubProcess\\
+\myrowcolour
+Documentation &Looping subProcesses can be embedded in code and surrounded by ordinary looping mechanisms or adapted to different types of subProcesses.\\
+Expression & //*[local-name() = 'definitions']//*[(local-name() = 'subProcess') and (child::*[local-name() = 'standardLoopCharacteristics'])]\\
+\myrowcolour
+Adaptions (5) & [embeddedfragmentWithExclusiveGateways, embeddedfragmentWithInclusiveGateways, embeddedfragmentWithComplexGateways, eventSubProcessAndLoopThatTriggersEvents, adHocSubprocess]\\
+\midrule
+Element name & loopTask\\
+\myrowcolour
+Documentation &A loopTask can be adapted by loop or ad hoc subProcesses or by a combination of the task with different gateway types\\
+Expression & //*[local-name() = 'definitions']//*[(local-name() = 'receiveTask' or local-name() = 'serviceTask' or local-name() = 'manualTask' or local-name() = 'businessRuleTask' or local-name() = 'userTask' or local-name() = 'sendTask'or local-name() = 'scriptTask'  or local-name() = 'globalUserTask' or local-name() = 'globalManualTask' or local-name() = ' globalScriptTask' or local-name() = 'globalBusinessRuleTask') and (child::*[local-name() = 'standardLoopCharacteristics'])]\\
+\myrowcolour
+Adaptions (6) & [exclusiveGatewaysAndSequenceFlows, inclusiveGatewaysAndSequenceFlows, complexGatewaysAndSequenceFlows, loopSubProcess, adHocSubProcess, eventSubProcess]\\
+\midrule
+Element name & manualTask\\
+\myrowcolour
+Documentation &There is no alternative and generally applicable way to represent an arbitrary external action\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'manualTask']\\
+\myrowcolour
+Adaptions (1) & [globalManualTask]\\
+\midrule
+Element name & messageEndEvent\\
+\myrowcolour
+Documentation &A messageEndEvent can be adapted to another type of endEvent that refers to ordered termination and produces a trigger\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'endEvent' and (child::*[local-name() = 'messageEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'messageEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (2) & [signalEndEvent, multipleEndEvent]\\
+\midrule
+Element name & messageStartEvent\\
+\myrowcolour
+Documentation &A messageStartEvent can be adapted to another startEvent that represents ordered process instantiation and is triggered in some fashion.\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'startEvent' and (child::*[local-name() = 'messageEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'messageEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [conditionalStartEvent, signalStartEvent, multipleStartEvent, parallelMultipleStartEvent]\\
+\midrule
+Element name & multipleEndEvent\\
+\myrowcolour
+Documentation &A multipleEndEvent can be adapted to multiple alternative events followed by a noneEndEvent\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'endEvent' and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]\\
+\myrowcolour
+Adaptions (1) & [multipleIntermediateEventsFollowedbyNoneEndEvent]\\
+\midrule
+Element name & multipleParallelStartEvent\\
+\myrowcolour
+Documentation &A multipleParallelStartEvent cannot be adapted since there is no other way to avoid the instantiation of a process unless multiple conditions are satisfied\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'startEvent' and @parallelMultiple = 'true' and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & multipleStartEvent\\
+\myrowcolour
+Documentation &A multipleStartEvent can be reduced to one of the available alternative start events\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'startEvent' and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]\\
+\myrowcolour
+Adaptions (3) & [multipleStartEventsWithExclusiveGateway, multipleStartEventsWithInclusiveGateway, multipleStartEventsWithComplexGateway]\\
+\midrule
+Element name & noneEndEvent\\
+\myrowcolour
+Documentation &A noneEndEvent can be adapted to any other endEvent that represents ordered termination\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'endEvent' and not(child::*[contains(local-name(),'ventDefinition')])]\\
+\myrowcolour
+Adaptions (3) & [messageEndEvent, signalEndEvent, multipleEndEvent]\\
+\midrule
+Element name & noneStartEvent\\
+\myrowcolour
+Documentation &A noneStartEvent can be adapted to another start event that represents normal process instantiation\\
+Expression & //*[local-name() = 'definitions']/*[local-name() = 'process']/*[local-name() = 'startEvent' and not(/*[contains(local-name(),'ventDefinition')])]\\
+\myrowcolour
+Adaptions (5) & [messageStartEvent, conditionalStartEvent, signalStartEvent, multipleStartEvent, parallelMultipleStartEvent]\\
+\midrule
+Element name & nonInterruptingConditionalBoundaryEvent\\
+\myrowcolour
+Documentation &A nonInterruptingConditionalBoundaryEvent can be adapted to another non-interrupting boundary event that leads to normal control-flow continuation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and not(@isInterrupting = 'true') and (child::*[local-name() = 'conditionalEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'conditionalEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [nonInterruptingSignalBoundaryEvent, nonInterruptingMessageBoundaryEvent, nonInterruptingMultipleBoundaryEvent, nonInterruptingMultipleParallelBoundaryEvent]\\
+\midrule
+Element name & nonInterruptingConditionalStartEvent\\
+\myrowcolour
+Documentation &A nonInterruptingConditionalStartEvent can be adapted to another non-interrupting start event that represents normal control-flow continuation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and not(@isInterrupting = 'true') and (child::*[local-name() = 'conditionalEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'conditionalEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [signalStartEvent, messageStartEvent, multipleStartEvent, multipleParallelStartEvent]\\
+\midrule
+Element name & nonInterruptingEscalationBoundaryEvent\\
+\myrowcolour
+Documentation &A nonInterruptingEscalationBoundaryEvent cannot be adapted since there is no other non-interrupting boundary event that leads to exceptional control-flow continuation. Error events are only interrupting\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and not(@isInterrupting = 'true') and (child::*[local-name() = 'escalationEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'escalationEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & nonInterruptingEscalationStartEvent\\
+\myrowcolour
+Documentation &A nonInterruptingEscalationStartEvent cannot be adapted since there is no other non-interrupting start event that represents exceptional control-flow continuation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and not(@isInterrupting = 'true') and (child::*[local-name() = 'escalationEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'escalationEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & nonInterruptingMessageBoundaryEvent\\
+\myrowcolour
+Documentation &A nonInterruptingMessageBoundaryEvent can be adapted to another non-interrupting boundary event that transmits a signal and represents normal control-flow continuation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and not(@isInterrupting = 'true') and (child::*[local-name() = 'messageEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'messageEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [nonInterruptingSignalBoundaryEvent, nonInterruptingConditionalBoundaryEvent, nonInterruptingMultipleBoundaryEvent, nonInterruptingMultipleParallelBoundaryEvent]\\
+\midrule
+Element name & nonInterruptingMessageStartEvent\\
+\myrowcolour
+Documentation &A nonInterruptingMessageStartEvent can be adapted to another non-interrupting start event that leads to normal control-flow continuation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and not(@isInterrupting = 'true') and (child::*[local-name() = 'messageEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'messageEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [signalStartEvent, conditionalStartEvent, multipleStartEvent, multipleParallelStartEvent]\\
+\midrule
+Element name & nonInterruptingMultipleBoundaryEvent\\
+\myrowcolour
+Documentation &A nonInterruptingMultipleBoundaryEvent can be adapted by multiple non-interrupting boundary events that link to a merging gateway\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and not (@isInterrupting = 'true') and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]\\
+\myrowcolour
+Adaptions (3) & [multipleNonInterruptingBoundaryEventsFollowedByExclusiveGateway, multipleNonInterruptingBoundaryEventsFollowedByInclusiveGateway, multipleNonInterruptingBoundaryEventsFollowedByComplexGateway]\\
+\midrule
+Element name & nonInterruptingMultipleStartEvent\\
+\myrowcolour
+Documentation &A nonInterruptingMultipleStartEvent can be adapted to multiple different eventSubProcesses with one startEvent each\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and not (@isInterrupting = 'true') and not(@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]\\
+\myrowcolour
+Adaptions (1) & [multipleEventSubProcessesWithSingleStartEvents]\\
+\midrule
+Element name & nonInterruptingParallelMultipleBoundaryEvent\\
+\myrowcolour
+Documentation &A multipleParallelBoundaryEvent cannot be adapted since there is no other way to ensure that multiple events are thrown in parallel in the context of a single activity\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and not (@isInterrupting = 'true') and (@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & nonInterruptingParallelMultipleStartEvent\\
+\myrowcolour
+Documentation &A multipleParallelStartEvent cannot be adapted since there is no other way to avoid the instantiation of a process unless multiple conditions are satisfied\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and not (@isInterrupting = 'true') and (@parallelMultiple = 'true') and (count(child::*[contains(local-name(),'ventDefinition')]) > 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & nonInterruptingSignalBoundaryEvent\\
+\myrowcolour
+Documentation &A nonInterruptingSignalBoundaryEvent can be adapted to another non-interrupting boundary event that leads to normal control-flow continuation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and not(@isInterrupting = 'true') and (child::*[local-name() = 'signalEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'signalEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [nonInterruptingMessageBoundaryEvent, nonInterruptingConditionalBoundaryEvent, nonInterruptingMultipleBoundaryEvent, nonInterruptingMultipleParallelBoundaryEvent]\\
+\midrule
+Element name & nonInterruptingSignalStartEvent\\
+\myrowcolour
+Documentation &A nonInterruptingSignalStartEvent can be adapted to another non-interrupting start event that represents normal process instantiation\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and not(@isInterrupting = 'true') and (child::*[local-name() = 'signalEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'signalEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [messageStartEvent, conditionalStartEvent, multipleStartEvent, multipleParallelStartEvent]\\
+\midrule
+Element name & nonInterruptingTimerBoundaryEvent\\
+\myrowcolour
+Documentation &A nonInterruptingTimerBoundaryEvent can be adapted to another non-interrupting boundary event that represents normal control-flow continuation and is fired by a trigger, as it is possible to calculate the expiration of the temporal condition and trigger the event when it occurs\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'boundaryEvent' and not(@isInterrupting = 'true') and (child::*[local-name() = 'timerEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'timerEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (5) & [noninterruptingSignalBoundaryEvent, noninterruptingConditionalBoundaryEvent, noninterruptingMessageBoundaryEvent, noninterruptingMultipleBoundaryEvent, noninterruptingParallelMultipleBoundaryEvent]\\
+\midrule
+Element name & nonInterruptingTimerStartEvent\\
+\myrowcolour
+Documentation &A nonInterruptingTimerStartEvent can be adapted to another startEvent that represents normal control-flow and is fired through a trigger, as it is possible to calculate the expiration of the temporal condition and fire the trigger the event when it occurs\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and @triggeredByEvent = 'true']/*[local-name() = 'startEvent' and not(@isInterrupting = 'true') and (child::*[local-name() = 'timerEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'timerEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (5) & [signalStartEvent, conditionalStartEvent, messageStartEvent, multipleStartEvent, parallelMultipleStartEvent]\\
+\midrule
+Element name & parallelEventBasedGateway\\
+\myrowcolour
+Documentation &A parallel eventBasedGateway can be adapted to a solution where the events are processed through catch events before a gateway that merges parallel branches\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'eventBasedGateway' and (@eventGatewayType = 'parallel') and not (@instantiate = 'true')]\\
+\myrowcolour
+Adaptions (2) & [inclusiveGateway, complexGateway]\\
+\midrule
+Element name & parallelGateway\\
+\myrowcolour
+Documentation &A parallelGateway can be replaced by other gateways that allow for parallelism, given the conditions of these gateways are set to trigger all branches\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'parallelGateway']\\
+\myrowcolour
+Adaptions (2) & [inclusiveGateway, complexGateway]\\
+\midrule
+Element name & parallelMultiInstanceSubProcess\\
+\myrowcolour
+Documentation &ParallelMultiInstanceSubProcesses can be embedded in the parent process and surrounded by a complexGateway to trigger the same branch multiple times or they can be adapted to an adHocSubProcess\\
+Expression & //*[local-name() = 'definitions']//*[(local-name() = 'subProcess') and (child::*[local-name() = 'multiInstanceLoopCharacteristics' and @isSequential='false'])]\\
+\myrowcolour
+Adaptions (2) & [embeddedfragmentWithComplexGateways, adHocSubprocess]\\
+\midrule
+Element name & parallelMultiInstanceTask\\
+\myrowcolour
+Documentation &A parallelMultiInstanceTask can be be adapted to a subProcess that allows for the execution of multiple instances in parallel\\
+Expression & //*[local-name() = 'definitions']//*[(local-name() = 'receiveTask' or local-name() = 'serviceTask' or local-name() = 'manualTask' or local-name() = 'businessRuleTask' or local-name() = 'userTask' or local-name() = 'sendTask' or local-name() = 'scriptTask'  or local-name() = 'globalUserTask' or local-name() = 'globalManualTask' or local-name() = ' globalScriptTask' or local-name() = 'globalBusinessRuleTask') and (child::*[local-name() = 'multiInstanceLoopCharacteristics' and @isSequential='false'])]\\
+\myrowcolour
+Adaptions (2) & [multiInstanceSubProcess, adHocSubProcess]\\
+\midrule
+Element name & receiveTask\\
+\myrowcolour
+Documentation &A receiveTask can be adapted to another task that can be used to wait for a message (programmatically or manually)\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'receiveTask']\\
+\myrowcolour
+Adaptions (7) & [serviceTask, userTask, scriptTask, globalScriptTask, globalUserTask, intermediateMessageCatchEvent, eventSubprocessWithMessageStartEvent]\\
+\midrule
+Element name & scriptTask\\
+\myrowcolour
+Documentation &A scriptTask can be adapted by another task that triggers (programmatically  or manually) the execution of a script. A receiveTask is not suitable, as it is passively waits without performing an action and a businessRuleTask is too specific\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'scriptTask']\\
+\myrowcolour
+Adaptions (5) & [serviceTask, sendATask, userTask, globalUserTask, globalScriptTask]\\
+\midrule
+Element name & sendTask\\
+\myrowcolour
+Documentation &A sendTask can be adapted to another task that, programmatically or manually, triggers the sending of a message. A receiveTask is not suitable as it passively waits without performing an action and a businessRuleTask is too specific. Also intermediate message throw events can serve as alternative\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'sendTask']\\
+\myrowcolour
+Adaptions (6) & [serviceTask, scriptTask, userTask, globalScriptTask, globalUserTask, intermediateMessageThrowEvent]\\
+\midrule
+Element name & sequenceFlow\\
+\myrowcolour
+Documentation &A sequenceFlow is a basic language element that cannot be adapted\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'sequenceFlow']\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & sequentialMultiInstanceSubProcess\\
+\myrowcolour
+Documentation &SequentialMultiInstanceSubProcesses can be embedded into the parent processes and be surrounded by ordinary looping mechanisms or adapted to different types of subprocesses\\
+Expression & //*[local-name() = 'definitions']//*[(local-name() = 'subProcess') and (child::*[local-name() = 'multiInstanceLoopCharacteristics' and @isSequential='true'])]\\
+\myrowcolour
+Adaptions (5) & [embeddedfragmentWithExclusiveGateways, embeddedfragmentWithComplexGateways, eventSubProcessAndLoopThatTriggersEvents, adHocSubprocess, loopSubProcess]\\
+\midrule
+Element name & sequentialMultiInstanceTask\\
+\myrowcolour
+Documentation &A sequentialMultiInstanceTask can be adapted to an ordinary sequential loop or a different represenation thereof, as well as to different subProcesses.\\
+Expression & //*[local-name() = 'definitions']//*[(local-name() = 'receiveTask' or local-name() = 'serviceTask' or local-name() = 'manualTask' or local-name() = 'businessRuleTask' or local-name() = 'userTask' or local-name() = 'sendTask' or local-name() = 'scriptTask'  or local-name() = 'globalUserTask' or local-name() = 'globalManualTask' or local-name() = ' globalScriptTask' or local-name() = 'globalBusinessRuleTask') and (child::*[local-name() = 'multiInstanceLoopCharacteristics' and @isSequential='true'])]\\
+\myrowcolour
+Adaptions (6) & [exclusiveGatewaysAndSequenceFlows, complexGatewaysAndSequenceFlows, loopTask, loopSubProcess, multiInstanceSubProcess, adHocSubProcess]\\
+\midrule
+Element name & serviceTask\\
+\myrowcolour
+Documentation &the adaptions of a serviceTask can be used to programatically or manually trigger service execution, possibly combined with a receive task in case of synchronous communication. A receiveTask alone is not suitable as it is passively waits without performing an action and a businessRuleTask is too specific. Also intermediate throwing and catching message events can be used.\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'serviceTask']\\
+\myrowcolour
+Adaptions (6) & [scriptTask, userTask, sendTask, globalScriptTask, globalUserTask, intermediateMessageThrowAndCatchEvents]\\
+\midrule
+Element name & signalEndEvent\\
+\myrowcolour
+Documentation &A signalEndEvent can be adapted to another type of endEvent that represents ordered termination and produces a trigger\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'endEvent' and (child::*[local-name() = 'signalEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'signalEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (2) & [messageEndEvent, multipleEndEvent]\\
+\midrule
+Element name & signalStartEvent\\
+\myrowcolour
+Documentation &A signalStartEvent can be adapted to another startEvent that represents normal process instantiation and provides a trigger\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'startEvent' and (child::*[local-name() = 'signalEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'signalEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (4) & [messageStartEvent, conditionalStartEvent, multipleStartEvent, parallelMultipleStartEvent]\\
+\midrule
+Element name & subProcess\\
+\myrowcolour
+Documentation &An ordinary subProcess can be embedded into the process or replaced by a more specific type of subProcess\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and not (@triggeredByEvent = 'true' or child::*[local-name() = 'multiInstanceLoopCharacteristics'] or child::*[local-name() = 'standardLoopCharacteristics'])]\\
+\myrowcolour
+Adaptions (4) & [embeddIntoProcess, transactionSubProcess, eventSubProcess, adHocSubProcess]\\
+\midrule
+Element name & subProcessStartEvent\\
+\myrowcolour
+Documentation &A startEvent of an ordinary subProcess cannot be adapted since it is the only way of starting non-eventSubProcesses\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'subProcess' and not(@triggeredByEvent = 'true')]/*[local-name() = 'startEvent']\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & task\\
+\myrowcolour
+Documentation &A plain task is a kind of wildcard element for an unspecified task and irrelevant to process execution\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'task' or local-name() = 'globalTask']\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & terminateEndEvent\\
+\myrowcolour
+Documentation &Since there is no alternative endEvent that results in immediate termination without compensation or event handling, this event cannot be adapted\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'endEvent' and (child::*[local-name() = 'terminateEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'terminateEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & timerStartEvent\\
+\myrowcolour
+Documentation &A timerStartEvent can be adapted to another startEvent that represents normal flow and is triggered in some fashion, as it is possible to calculate the expiration of the time and trigger the event when it does\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'startEvent' and (child::*[local-name() = 'timerEventDefinition'] or child::*[local-name() = 'eventDefinitionRef' and text() = //*[local-name() = 'timerEventDefinition']/@id]) and (count(child::*[contains(local-name(),'ventDefinition')]) = 1)]\\
+\myrowcolour
+Adaptions (5) & [conditionalStartEvent, messageStartEvent, signalStartEvent, multipleStartEvent, parallelMultipleStartEvent]\\
+\midrule
+Element name & transactionSubProcess\\
+\myrowcolour
+Documentation &A transactional context cannot be emulated with any other element in BPMN\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'transaction']\\
+\myrowcolour
+Adaptions (0) & []\\
+\midrule
+Element name & userTask\\
+\myrowcolour
+Documentation &A userTask can be adapted through another task that is programmed to ask for user input\\
+Expression & //*[local-name() = 'definitions']//*[local-name() = 'userTask']\\
+\myrowcolour
+Adaptions (5) & [scriptTask, serviceTask, sendAndReceiveTask, globalScriptTask, globalUserTask]\\
+\end{longtable}
+\end{tiny}
+\end{center}
