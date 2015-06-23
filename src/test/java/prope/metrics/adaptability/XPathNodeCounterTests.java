@@ -1,5 +1,11 @@
 package prope.metrics.adaptability;
 
+import static org.junit.Assert.assertTrue;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import net.sf.saxon.lib.NamespaceConstant;
@@ -34,6 +40,17 @@ public class XPathNodeCounterTests {
 	@Test(expected = UnsupportedOperationException.class)
 	public void processOccurrencesShouldBeUnmodifiable(){
 		sut.getProcessOccurences().put("abc", new AtomicInteger());
+	}
+	
+	@Test
+	public void csvWrite() throws IOException{
+		Path fileLocation = Paths.get("tmp.csv");
+		Files.deleteIfExists(fileLocation);
+		
+		sut.writeToCsv(fileLocation);
+		
+		assertTrue(Files.exists(fileLocation));
+		Files.deleteIfExists(fileLocation);
 	}
 
 }
