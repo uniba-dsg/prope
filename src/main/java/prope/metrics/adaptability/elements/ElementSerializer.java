@@ -45,8 +45,8 @@ public class ElementSerializer {
 
 	private void writeLongTableHeader() {
 		println("\\begin{center}");
-		println("\\begin{scriptsize}");
-		println("\\begin{longtable}{p{0.13\\textwidth}|p{0.82\\textwidth}}");
+		println("\\begin{tiny}");
+		println("\\begin{longtable}{p{0.13\\textwidth}|p{0.81\\textwidth}}");
 		println("\\caption{Adaptability Scores}\\\\");
 		println("\\label{tab:adaptableElements}\\\\");
 		println("\\textbf{Property} & \\textbf{Element}");
@@ -87,7 +87,7 @@ public class ElementSerializer {
 
 	private void writeLongTableFooter() {
 		println("\\end{longtable}");
-		println("\\end{scriptsize}");
+		println("\\end{tiny}");
 		println("\\end{center}");
 	}
 
