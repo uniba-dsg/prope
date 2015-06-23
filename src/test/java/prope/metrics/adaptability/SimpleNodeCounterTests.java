@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
+import prope.metrics.adaptability.AdaptabilityAnalyzer;
 import prope.metrics.adaptability.nodecounters.NodeCounter;
 import prope.metrics.adaptability.nodecounters.SimpleNodeCounter;
 
