@@ -10,14 +10,13 @@ Prope is a static analyzer that _probes_ for portability issues in process code 
 It can analyze a variety of artifacts, most notably processes written in BPMN 2.0 and BPEL 2.0. It can also analyze deployment archives and log files.
 
 ## Quality Characteristics
-Prope computes portability metrics aligned to the ISO/IEC 25010 Systems and software Quality Requirements and Evaluation (SQuaRE) method. This involves four quality characteristics:
+Prope computes portability metrics aligned to the ISO/IEC 25010 Systems and software Quality Requirements and Evaluation (SQuaRE) method. This includes the following quality characteristics:
 
 | Quality Characteristic     | Status (package)          | 
 | ------------- |-------------| 
 | Direct code portability      | implemented (`prope.metrics.portability`)| 
 | Installability     | implemented (`prope.metrics.installability`) | 
 | Adaptability      | implemented (`prope.metrics.adaptability`)| 
-| Replaceability      | ongoing | |
 
 ## Software Requirements
 Prope uses the gradle wrapper, so anything besides Java will be downloaded and installed automatically.
