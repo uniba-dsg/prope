@@ -36,6 +36,14 @@ public class PortabilityAnalyzerTests {
 		assertActivityPortability(result, 0.888);
 		assertServicePortability(result, 0.814);
 	}
+	
+	@Test
+	public void checkWarnings() {
+		sut.analyzeFile(
+				Paths.get("src/test/resources/portability/Invoke-Empty.bpel"))
+				.get(0);
+		assertEquals(1, sut.getWarningsFromLastAnalysis().size());
+	}
 
 	private void assertNumberOfElements(ReportEntry entry, int numberOfElements) {
 		assertEquals(Integer.parseInt(entry.getVariableValue("N")),
