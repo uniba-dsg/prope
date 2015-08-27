@@ -1,8 +1,54 @@
-apply plugin: "java"
-apply plugin: "idea"
-apply plugin: "eclipse"
-apply plugin: "application"
-apply plugin: "findbugs"
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
+    }
+}
+
+plugins {
+	id "java"
+	id "idea"
+	id "eclipse"
+	id "application"
+	id "jacoco"
+	id "maven"
+	id "maven-publish"
+	id "findbugs"
+	id "com.github.kt3k.coveralls" version "2.4.0"
+    id "com.jfrog.bintray" version "1.3.1"
+}
+
+publishing {
+	publications {
+		Bintray(MavenPublication) {
+			from components.java
+			groupId 'uniba-dsg'
+            		artifactId 'prope'
+            		version '1.0.0'
+		}
+	}
+}
+
+bintray {   
+    user = 'bintray_user'
+    key = 'bintray_api_key'
+	publications = ['Bintray']
+    pkg {
+        repo = 'prope'
+        name = 'prope'
+        userOrg = 'uniba-dsg'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/uniba-dsg/prope.git'
+		version {
+            name = '1.0.0-Final'
+            desc = 'PROcess-aware information systems Portability mEtrics suite 1.0.0 final'
+            vcsTag = 'v1.0.0'
+        }
+    }
+}
 
 mainClassName = "prope.Prope"
 
@@ -64,19 +110,6 @@ jar {
         exclude "META-INF/*.RSA"
    }
    manifest { attributes 'Main-Class': mainClassName }
-}
-
-apply plugin: 'jacoco'
-apply plugin: 'com.github.kt3k.coveralls'
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
-    }
 }
 
 jacocoTestReport {
