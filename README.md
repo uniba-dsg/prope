@@ -90,7 +90,7 @@ Prope produces two different files that are written to the root directory and ca
 
 ## Authors 
 
-[Joerg Lenhard](http://www.uni-bamberg.de/pi/team/lenhard-joerg/)
+[Joerg Lenhard](https://joerglenhard.wordpress.com/)
 
 ## Contribution Guide
 Contribution is appreciated! Feel free to open issues. Apart from that, the normal git workflow applies:
